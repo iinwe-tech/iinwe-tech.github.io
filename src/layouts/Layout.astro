@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 import 'pretendard/dist/web/variable/pretendardvariable.css';
+import Footer from '@/components/navigation/Footer.astro';
 
 interface Props {
 	title: string;
@@ -45,5 +46,6 @@ canonicalURL.pathname = canonicalURL.pathname.replace(/\/$/, '');
   </head>
   <body>
     <slot />
+    <Footer />
   </body>
 </html>
