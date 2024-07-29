@@ -7,6 +7,9 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+const canonicalURL =  new URL(Astro.url.pathname, Astro.site);
+canonicalURL.pathname = canonicalURL.pathname.replace(/\/$/, "");
 ---
 
 <!doctype html>
@@ -22,6 +25,7 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={canonicalURL} />
   </head>
   <body>
     <slot />
