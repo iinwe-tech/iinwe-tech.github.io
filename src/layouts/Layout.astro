@@ -26,6 +26,20 @@ canonicalURL.pathname = canonicalURL.pathname.replace(/\/$/, "");
     <title>{title}</title>
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={canonicalURL} />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-5JPD747WPC"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-5JPD747WPC');
+    </script>
   </head>
   <body>
     <slot />
