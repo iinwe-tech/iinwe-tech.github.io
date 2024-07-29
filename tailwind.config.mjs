@@ -28,8 +28,8 @@ export default {
         'purple-h': '#6400c8',
         'purple-l': '#dfcaff',
         'orange': '#ff4d37',
-        'black': '#121212'
-      }
+        'black': '#121212',
+      },
     },
   },
   plugins: [

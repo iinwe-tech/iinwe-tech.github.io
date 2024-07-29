@@ -39,6 +39,7 @@
     "*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}": "eslint --fix"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "pnpm": ">=9"
   }
 }

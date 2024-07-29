@@ -7,10 +7,10 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const fullTitle = title ? `${title} | 아이인위` : "I in We";
+const fullTitle = title ? `${title} | 아이인위` : 'I in We';
 
 const canonicalURL =  new URL(Astro.url.pathname, Astro.site);
-canonicalURL.pathname = canonicalURL.pathname.replace(/\/$/, "");
+canonicalURL.pathname = canonicalURL.pathname.replace(/\/$/, '');
 ---
 
 <!doctype html>
@@ -35,7 +35,7 @@ canonicalURL.pathname = canonicalURL.pathname.replace(/\/$/, "");
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
-        dataLayer.push(arguments);
+        window.dataLayer.push(arguments);
       }
       gtag('js', new Date());
 
