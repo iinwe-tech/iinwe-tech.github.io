@@ -3913,8 +3913,8 @@ snapshots:
       tsconfck: 3.1.1(typescript@5.5.4)
       unist-util-visit: 5.0.0
       vfile: 6.0.2
-      vite: 5.3.5
-      vitefu: 0.2.5(vite@5.3.5)
+      vite: 5.3.5(sass@1.77.8)
+      vitefu: 0.2.5(vite@5.3.5(sass@1.77.8))
       which-pm: 3.0.0
       yargs-parser: 21.1.1
       zod: 3.23.8
@@ -5859,6 +5859,12 @@ snapshots:
       suf-log: 2.5.3
 
   sax@1.4.1: {}
+
+  section-matter@1.0.0:
+    dependencies:
+      chokidar: 3.6.0
+      immutable: 4.3.7
+      source-map-js: 1.2.0
 
   section-matter@1.0.0:
     dependencies:
