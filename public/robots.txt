@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iinwe.org/sitemap-index.xml
