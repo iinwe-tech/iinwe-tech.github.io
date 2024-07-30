@@ -16,15 +16,19 @@
 </div>
 
 <script>
-    // 멤버십 가입하기 버튼 클릭 이벤트
-    document.getElementById('membershipButton').addEventListener('click', () => {
-      window.open('https://forms.gle/4GqkZByad6L2dx247');
-    });
+    const membershipButton = document.getElementById('membershipButton');
+    const snsButton = document.getElementById('snsButton');
 
-    // SNS 구독하기 버튼 클릭 이벤트
-    document.getElementById('snsButton').addEventListener('click', () => {
-      window.open('https://linktr.ee/iinwe');
-    });
+    if (membershipButton) {
+      membershipButton.addEventListener('click', () => {
+        window.open('https://forms.gle/4GqkZByad6L2dx247');
+      });
+    }
+    if (snsButton) {
+      snsButton.addEventListener('click', () => {
+        window.open('https://linktr.ee/iinwe');
+      });
+    }
 </script>
 
 <style lang="scss">
