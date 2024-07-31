@@ -29,7 +29,7 @@ jobs:
         run: pnpm run build
 
       - name: Copy CNAME to dist
-        run: cp -n CNAME dist/CNAME || true
+        run: cp CNAME dist/CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
