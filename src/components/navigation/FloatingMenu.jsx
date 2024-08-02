@@ -76,7 +76,14 @@ const FloatingMenu = () => {
                             <label htmlFor="theme" className="text-gray-500 font-normal">
                                 아이인위 멤버십
                             </label>
-                            <button className="py-1 px-2 rounded-lg transition border border-purple-h text-purple-h hover:bg-purple-200">가입하기</button>
+                            <a
+                                href="https://forms.gle/4GqkZByad6L2dx247"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="py-1 px-2 rounded-lg transition border border-purple-h text-purple-h hover:bg-purple-200"
+                            >
+                                가입하기
+                            </a>
                         </div>
                     </div>
                 </div>
