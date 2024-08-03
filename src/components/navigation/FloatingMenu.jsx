@@ -4,7 +4,7 @@
  * Copyright 2024 Fonticons, Inc.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const FloatingMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
