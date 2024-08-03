@@ -40,7 +40,7 @@
     "sass": "^1.77.8"
   },
   "lint-staged": {
-    "*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}": "eslint --fix"
+    "*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}": "pnpm lint:fix"
   },
   "engines": {
     "node": ">=18",
