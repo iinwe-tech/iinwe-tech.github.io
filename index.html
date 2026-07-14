@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="/iinwelogo.svg">
+<title>아이인위 — I in We</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 기본 본문 폰트: Pretendard -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --purple: #6400C8;
+    --orange: #FF4D37;
+    --lavender: #DFCAFF;
+    --white: #ffffff;
+    --gray: #6b6b6b;
+    --bg: #f8f6fb;
+    --border: rgba(0,0,0,0.09);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif; background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+  /* 링크 기본값: 파란색/밑줄 제거 → 브랜드 컬러 (개별 클래스 색상은 그대로 우선 적용) */
+  a { color: var(--purple); text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid var(--border);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+  }
+  .nav-logo { display: flex; align-items: center; text-decoration: none; }
+  .nav-logo img { height: 26px; width: auto; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--gray); font-size: 0.85rem; letter-spacing: 0.01em; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta { background: var(--purple); color: #fff; padding: 0.55rem 1.3rem; border-radius: 2rem; text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: opacity 0.2s; white-space: nowrap; }
+  .nav-cta:hover { opacity: 0.82; color: #fff; }
+
+  /* 햄버거 버튼 (모바일) */
+  .nav-toggle {
+    display: none;
+    flex-direction: column; justify-content: center; gap: 5px;
+    width: 42px; height: 42px; padding: 9px; margin: -9px -9px -9px 0;
+    background: none; border: none; cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block; width: 100%; height: 2px;
+    background: var(--ink); border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.25s ease;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* 모바일 슬라이드 메뉴 */
+  .mobile-menu {
+    position: fixed; top: 0; right: 0; z-index: 101;
+    width: min(80vw, 320px); height: 100vh; height: 100dvh;
+    background: rgba(255,255,255,0.98); backdrop-filter: blur(18px);
+    box-shadow: -8px 0 40px rgba(0,0,0,0.12);
+    display: flex; flex-direction: column;
+    padding: 5.5rem 1.8rem 2rem;
+    transform: translateX(105%);
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a {
+    color: var(--ink); font-size: 1.02rem; font-weight: 500;
+    padding: 0.9rem 0.3rem; border-bottom: 0.5px solid var(--border);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--purple); }
+  .mobile-menu .mobile-menu-cta {
+    margin-top: 1.3rem; background: var(--purple); color: #fff;
+    text-align: center; border: none; border-radius: 2rem;
+    padding: 0.95rem; font-weight: 700; font-size: 0.95rem;
+  }
+  .mobile-menu .mobile-menu-cta:hover { color: #fff; opacity: 0.88; }
+  .mobile-menu-backdrop {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.35);
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .mobile-menu-backdrop.open { opacity: 1; visibility: visible; }
+
+  /* SCROLL STORY */
+  .scroll-story { height: 400vh; position: relative; }
+  .scroll-sticky {
+    position: sticky; top: 0; height: 100vh; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .story-slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem;
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    pointer-events: none;
+  }
+  .story-slide.active {
+    opacity: 1; transform: translateY(0);
+    pointer-events: auto;
+  }
+  .story-slide.exit {
+    opacity: 0; transform: translateY(-40px);
+  }
+
+  /* Slide 1 — white */
+  .slide-1 {
+    background: var(--white);
+    background-image: url('assets/image-01.jpg');
+    background-size: cover; background-position: center top;
+  }
+  .slide-1::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(0,0,0,0.45); z-index: 0;
+  }
+  .slide-1 > * { position: relative; z-index: 1; }
+  .slide-1 .s-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--orange); font-weight: 700; margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .slide-1 .s-eyebrow::before,
+  .slide-1 .s-eyebrow::after { content: ''; display: block; width: 30px; height: 1.5px; background: var(--orange); }
+  .slide-1 .s-words {
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem; text-align: center;
+  }
+  .slide-1 .s-word {
+    font-size: clamp(3rem, 8vw, 7rem); font-weight: 900;
+    line-height: 1; letter-spacing: 0.04em; color: var(--white); text-shadow: 0 2px 20px rgba(0,0,0,0.4); font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .slide-1.active .s-word:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+  .slide-1.active .s-word:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+  .slide-1.active .s-word:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+  .slide-1 .s-word span { color: var(--orange); }
+  .s-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem); font-weight: 400;
+    color: rgba(255,255,255,0.82); margin-top: 1.6rem;
+    letter-spacing: 0.01em; line-height: 1.6;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+  }
+
+  /* Slide 2 — dark */
+  .slide-2 {
+    background: var(--ink);
+    background-image: url('assets/image-02.jpg');
+    background-size: cover; background-position: center;
+  }
+  .slide-2::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(0,0,0,0.55); z-index: 0;
+  }
+  .slide-2 > * { position: relative; z-index: 1; }
+  .slide-2 .s-label {
+    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35); font-weight: 600; margin-bottom: 2rem;
+  }
+  .slide-2 .s-big {
+    font-size: clamp(4rem, 12vw, 10rem); font-weight: 900;
+    line-height: 0.95; letter-spacing: 0.04em; color: var(--white); text-shadow: 0 2px 24px rgba(0,0,0,0.5); -webkit-text-stroke: 1px rgba(255,255,255,0.1); font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+  .slide-2 .s-big em { font-style: normal; color: var(--orange); }
+  .slide-2 .s-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.45); margin-top: 2rem;
+    letter-spacing: 0.06em; font-weight: 400;
+  }
+
+  /* Slide 3 — lavender */
+  .slide-3 {
+    background: var(--lavender);
+    background-image: url('assets/image-03.jpg');
+    background-size: cover; background-position: center;
+  }
+  .slide-3::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(0,0,0,0.50); z-index: 0;
+  }
+  .slide-3 > * { position: relative; z-index: 1; }
+  .slide-3 .s-label {
+    font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); font-weight: 700; margin-bottom: 2rem;
+  }
+  .slide-3 .s-big {
+    font-size: clamp(4rem, 12vw, 10rem); font-weight: 900;
+    line-height: 0.95; letter-spacing: 0.04em; color: var(--white); text-shadow: 0 2px 24px rgba(0,0,0,0.5); -webkit-text-stroke: 1px rgba(255,255,255,0.1); font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+    text-align: center;
+  }
+  .slide-3 .s-big em { font-style: normal; color: #fff; }
+  .slide-3 .s-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.75); margin-top: 2rem;
+    letter-spacing: 0.06em; font-weight: 400;
+  }
+  .slide-3 .s-cta {
+    margin-top: 3rem;
+    background: var(--purple); color: #fff;
+    padding: 0.9rem 2.2rem; border-radius: 3rem;
+    text-decoration: none; font-size: 0.9rem; font-weight: 700;
+    transition: opacity 0.2s;
+  }
+  .slide-3 .s-cta:hover { opacity: 0.85; }
+
+  /* scroll indicator */
+  .scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gray); font-weight: 500; opacity: 0; transition: opacity 0.5s;
+  }
+  .scroll-hint.show { opacity: 1; }
+  .scroll-hint.dark { color: rgba(255,255,255,0.35); }
+  .scroll-hint.purple { color: rgba(100,0,200,0.5); }
+  .scroll-arrow {
+    width: 1px; height: 32px; background: currentColor;
+    position: relative; overflow: hidden;
+  }
+  .scroll-arrow::after {
+    content: ''; position: absolute;
+    width: 1px; height: 100%; background: currentColor;
+    top: -100%; animation: drop 1.4s ease infinite;
+  }
+  @keyframes drop { to { top: 100%; } }
+
+  /* progress dots */
+  .story-dots {
+    position: absolute; right: 2.5rem; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 0.6rem; z-index: 10;
+  }
+  .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(0,0,0,0.2); transition: all 0.3s;
+    cursor: pointer;
+  }
+  .dot.active { background: var(--orange); transform: scale(1.4); }
+  .dot.dark-dot { background: rgba(255,255,255,0.25); }
+  .dot.dark-dot.active { background: var(--orange); }
+
+
+  /* SECTION BASE */
+  section { padding: 6rem 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .sec-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+  .sec-label::before { content: ''; display: block; width: 18px; height: 1.5px; background: var(--orange); }
+  h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+
+  /* SCROLL REVEAL GALLERY */
+  .gallery { background: var(--ink); padding: 6rem 0 8rem; }
+  .gallery-header { padding: 0 3rem; max-width: 1100px; margin: 0 auto 4rem; }
+  .gallery-header h2 { color: var(--white); }
+  .gallery-header .sec-label { color: var(--orange); }
+  .gallery-header .sec-label::before { background: var(--orange); }
+
+  .reveal-list { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 0 2rem; }
+  .reveal-item {
+    position: relative; width: 100%; max-width: 900px;
+    height: 560px; border-radius: 1.4rem; overflow: hidden;
+    display: flex; align-items: flex-end;
+    opacity: 0; transform: translateY(50px);
+    transition: opacity 0.85s cubic-bezier(0.4,0,0.2,1), transform 0.85s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+  }
+  .reveal-item.visible { opacity: 1; transform: translateY(0); }
+  .reveal-item img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .reveal-item:hover img { transform: scale(1.04); }
+  .reveal-item::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.05) 55%, transparent 100%);
+    border-radius: 1.4rem;
+  }
+  .reveal-caption {
+    position: relative; z-index: 2;
+    padding: 2rem 2.2rem;
+    width: 100%;
+  }
+  .reveal-year {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 0.4rem;
+  }
+  .reveal-title {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem); font-weight: 700;
+    color: #fff; line-height: 1.2; letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 900px) {
+    .reveal-item { height: 320px; }
+    .reveal-list { padding: 0 1rem; gap: 1rem; }
+    .gallery-header { padding: 0 1.5rem; }
+  }
+
+
+  /* ABOUT */
+  .about { background: var(--bg); position: relative; }
+  .about::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--white));
+    pointer-events: none; z-index: 1;
+  }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 4rem; }
+  .about-text p { font-size: 0.97rem; line-height: 1.9; color: var(--gray); margin-bottom: 1.2rem; }
+  .about-text strong { color: var(--ink); font-weight: 700; }
+
+  /* PARTNERS MARQUEE */
+  .partners-wrap { overflow: hidden; margin-bottom: 2.5rem; }
+  .partners-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); font-weight: 700; margin-bottom: 1.2rem; }
+  .marquee-track {
+    display: flex; gap: 1.4rem;
+    animation: marquee 28s linear infinite;
+    width: max-content;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  .partner-logo {
+    height: 56px; min-width: 150px; padding: 0 1.6rem;
+    background: var(--white); border-radius: 0.8rem;
+    border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 700; color: var(--ink);
+    white-space: nowrap; flex-shrink: 0; letter-spacing: -0.01em;
+    transition: border-color 0.2s;
+  }
+  .partner-logo:hover { border-color: var(--orange); }
+  .partner-logo.empty { color: transparent; background: var(--bg); border: 1px dashed rgba(0,0,0,0.1); min-width: 120px; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes marquee-rev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+  .marquee-reverse { animation: marquee-rev 28s linear infinite; }
+  .marquee-reverse:hover { animation-play-state: paused; }
+
+  /* BENTO STATS — 가로 5칸 */
+  .bento { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; margin-top: 0; }
+  .bento-card {
+    background: var(--white); border-radius: 1.2rem;
+    padding: 1.8rem 1.4rem;
+    cursor: default;
+    transition: background 0.3s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .bento-card:hover { transform: translateY(-2px); }
+
+  .bento-card.hover-orange:hover { background: var(--orange); }
+  .bento-card.hover-orange:hover .b-num,
+  .bento-card.hover-orange:hover .b-label { color: #fff; }
+  .bento-card.hover-orange:hover .b-sub { opacity: 1; color: rgba(255,255,255,0.85); }
+
+  .bento-card.hover-purple:hover { background: var(--lavender); }
+  .bento-card.hover-purple:hover .b-num { color: var(--purple); }
+  .bento-card.hover-purple:hover .b-label { color: var(--ink); }
+  .bento-card.hover-purple:hover .b-sub { opacity: 1; color: var(--purple); }
+
+  .bento-card.hover-ink:hover { background: var(--ink); }
+  .bento-card.hover-ink:hover .b-num { color: var(--lavender); }
+  .bento-card.hover-ink:hover .b-label { color: rgba(255,255,255,0.6); }
+
+  .bento-card.hover-rose:hover { background: var(--lavender); }
+  .bento-card.hover-rose:hover .b-num { color: var(--purple); }
+  .bento-card.hover-rose:hover .b-label { color: var(--ink); }
+
+  .b-num { font-size: 2rem; font-weight: 900; line-height: 1; color: var(--orange); margin-bottom: 0.4rem; transition: color 0.3s; }
+  .b-label { font-size: 0.78rem; color: var(--gray); font-weight: 500; line-height: 1.4; transition: color 0.3s; }
+  .b-sub { font-size: 0.7rem; color: var(--gray); margin-top: 0.5rem; opacity: 0; transition: opacity 0.3s; line-height: 1.5; }
+
+
+
+  /* BOARD */
+  .board { background: var(--white); }
+  .board-tabs { display: flex; gap: 0; margin-top: 3rem; border-bottom: 1.5px solid var(--border); }
+  .tab-btn { padding: 0.85rem 1.8rem; font-size: 0.88rem; font-weight: 600; font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif; background: none; border: none; cursor: pointer; color: var(--gray); position: relative; transition: color 0.2s; }
+  .tab-btn::after { content: ''; position: absolute; bottom: -1.5px; left: 0; right: 0; height: 2.5px; background: var(--purple); transform: scaleX(0); transition: transform 0.22s; }
+  .tab-btn.active { color: var(--purple); }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--purple); }
+  .tab-panel { display: none; padding-top: 2.5rem; }
+  .tab-panel.active { display: block; }
+  .board-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .board-card { border: 0.5px solid var(--border); border-radius: 1rem; padding: 1.8rem 1.5rem; transition: all 0.22s; cursor: pointer; }
+  a.board-card { text-decoration: none; color: inherit; display: block; }
+  .board-card:hover { border-color: var(--purple); box-shadow: 0 4px 24px rgba(100,0,200,0.08); transform: translateY(-2px); }
+  .card-tag { display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; background: var(--lavender); color: var(--purple); padding: 0.28rem 0.7rem; border-radius: 2rem; margin-bottom: 1rem; }
+  .card-tag.red { background: #ffe8e5; color: var(--orange); }
+  .card-tag.gray { background: #f0f0f0; color: #444; }
+  .card-title { font-size: 0.95rem; font-weight: 700; line-height: 1.5; margin-bottom: 0.5rem; }
+  .card-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.75; margin-bottom: 1.2rem; }
+  .card-arrow { font-size: 0.9rem; color: #ccc; transition: color 0.2s; }
+  .board-card:hover .card-arrow { color: var(--purple); }
+
+  /* NETWORKING */
+  .networking { background: var(--bg); }
+  .net-tabs { display: flex; gap: 0.6rem; margin-top: 3rem; }
+  .net-tab-btn { padding: 0.65rem 1.4rem; font-size: 0.82rem; font-weight: 600; font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif; background: var(--white); border: 1px solid var(--border); border-radius: 2rem; cursor: pointer; color: var(--gray); transition: all 0.2s; }
+  .net-tab-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+  .net-tab-btn:hover:not(.active) { border-color: var(--purple); color: var(--purple); }
+  .net-panel { display: none; padding-top: 2.5rem; }
+  .net-panel.active { display: block; }
+
+  .staff-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .staff-card { background: var(--white); border-radius: 1.2rem; padding: 2rem 1.4rem; text-align: center; border: 0.5px solid var(--border); transition: all 0.22s; }
+  .staff-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  .staff-avatar { position: relative; overflow: hidden; width: 64px; height: 64px; border-radius: 50%; background: var(--lavender); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--purple); }
+  .staff-avatar .staff-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .staff-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.15rem; }
+  .staff-eng { font-size: 0.72rem; color: var(--gray); margin-bottom: 0.55rem; letter-spacing: 0.01em; }
+  .staff-role { font-size: 0.8rem; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 0.12rem; }
+  .staff-role-en { font-size: 0.68rem; color: var(--gray); line-height: 1.4; margin-bottom: 0.7rem; }
+  .staff-email { display: inline-block; font-size: 0.72rem; color: var(--purple); text-decoration: none; word-break: break-all; transition: color 0.2s; }
+  .staff-email:hover { color: var(--orange); }
+  .staff-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; background: #ffe8e5; color: var(--orange); padding: 0.22rem 0.6rem; border-radius: 2rem; }
+  .staff-note { font-size: 0.78rem; color: var(--gray); margin-top: 1.5rem; text-align: right; }
+
+  /* ALUMNI (전 운영진) — 운영진과 같은 시트에서 활동중이 아닌 분들 */
+  .alumni-block { margin-top: 3.5rem; padding-top: 2.6rem; border-top: 0.5px solid var(--border); }
+  .alumni-title { font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
+  .alumni-sub { font-size: 0.82rem; color: var(--gray); margin-top: 0.4rem; margin-bottom: 1.7rem; line-height: 1.6; }
+  .alumni-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+  .alumni-card { display: flex; flex-direction: column; gap: 1.1rem; background: var(--white); border-radius: 1.2rem; padding: 1.8rem 1.7rem; text-align: left; border: 0.5px solid var(--border); transition: all 0.22s; text-decoration: none; color: inherit; }
+  .alumni-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  .alumni-quote { position: relative; font-size: 0.92rem; color: var(--ink); line-height: 1.75; padding-top: 1.5rem; margin: 0; }
+  .alumni-quote::before { content: '\201C'; position: absolute; top: 0.1rem; left: -0.15rem; font-family: Georgia, 'Times New Roman', serif; font-size: 2.6rem; line-height: 1; color: var(--orange); opacity: 0.5; }
+  .alumni-foot { display: flex; align-items: center; gap: 0.85rem; margin-top: auto; }
+  .alumni-avatar { position: relative; overflow: hidden; flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: var(--lavender); margin: 0; display: flex; align-items: center; justify-content: center; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.02em; color: var(--purple); transition: transform 0.22s; }
+  .alumni-avatar .alumni-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  a.alumni-card:hover .alumni-avatar { transform: scale(1.06); }
+  .alumni-meta { min-width: 0; }
+  .alumni-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.05rem; }
+  .alumni-eng { font-size: 0.72rem; color: var(--gray); margin-bottom: 0.18rem; letter-spacing: 0.01em; }
+  .alumni-role { font-size: 0.72rem; color: var(--gray); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .alumni-link { display: inline-block; margin-top: 0.35rem; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; color: var(--purple); }
+
+  .member-lock { position: relative; border-radius: 1.5rem; overflow: hidden; border: 1.5px dashed rgba(100,0,200,0.22); background: var(--white); }
+  .member-blur-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; padding: 2rem; filter: blur(7px); pointer-events: none; user-select: none; }
+  .member-blur-card { background: var(--lavender); border-radius: 1.2rem; padding: 2rem 1.4rem; text-align: center; opacity: 0.45; }
+  .blur-avatar { width: 56px; height: 56px; border-radius: 50%; background: rgba(100,0,200,0.2); margin: 0 auto 0.8rem; }
+  .blur-line { height: 10px; background: rgba(100,0,200,0.15); border-radius: 4px; margin: 0 auto 0.5rem; }
+  .blur-line.short { width: 60%; }
+  .member-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; background: rgba(248,246,251,0.72); backdrop-filter: blur(2px); padding: 2rem; }
+  .lock-icon { font-size: 2.2rem; }
+  .lock-title { font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+  .lock-desc { font-size: 0.85rem; color: var(--gray); text-align: center; max-width: 260px; line-height: 1.65; }
+  .btn-lock { background: var(--purple); color: #fff; padding: 0.8rem 2rem; border-radius: 3rem; text-decoration: none; font-size: 0.88rem; font-weight: 700; transition: opacity 0.2s; }
+  .btn-lock:hover { opacity: 0.85; }
+
+  /* PROGRAMS */
+  /* SCROLL PHRASE REVEAL — iOS picker style */
+  .phrase-scroll-section {
+    height: 700vh;
+    position: relative;
+    background: var(--white);
+  }
+  .phrase-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .phrase-wheel {
+    width: 100%;
+    max-width: 860px;
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+  }
+  .phrase-drum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.35s cubic-bezier(0.33,1,0.68,1);
+    will-change: transform;
+  }
+  .phrase-item {
+    font-size: clamp(2.2rem, 5.2vw, 4rem);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    text-align: center;
+    padding: 1.35rem 0;
+    color: rgba(0,0,0,0.18);
+    transition: color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.88);
+    opacity: 0.4;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .phrase-item mark {
+    background: none;
+    color: rgba(0,0,0,0.18);
+    transition: color 0.3s ease;
+    font-style: normal;
+  }
+  .phrase-item.active {
+    color: var(--ink);
+    opacity: 1;
+    transform: scale(1);
+    font-weight: 600;
+  }
+  .phrase-item.near {
+    color: rgba(0,0,0,0.38);
+    opacity: 0.55;
+    transform: scale(0.93);
+  }
+
+  /* 이모지 애니메이션 */
+  .phrase-emoji {
+    display: inline-block;
+    transform-origin: center bottom;
+    will-change: transform;
+  }
+  /* 가운데(활성) 문구의 이모지: 통통 튀며 살짝 흔들림 */
+  .phrase-item.active .phrase-emoji {
+    animation: emojiPop 1.3s ease-in-out infinite;
+  }
+  @keyframes emojiPop {
+    0%, 100% { transform: translateY(0)    rotate(0deg)  scale(1); }
+    15%      { transform: translateY(-26%) rotate(-10deg) scale(1.22); }
+    30%      { transform: translateY(0)    rotate(8deg)  scale(1.05); }
+    45%      { transform: translateY(-12%) rotate(-5deg) scale(1.12); }
+    60%      { transform: translateY(0)    rotate(3deg)  scale(1); }
+  }
+  /* 위·아래 인접 문구의 이모지: 은은하게 떠다님 */
+  .phrase-item.near .phrase-emoji {
+    animation: emojiFloat 2.6s ease-in-out infinite;
+  }
+  @keyframes emojiFloat {
+    0%, 100% { transform: translateY(0)    rotate(0deg); }
+    50%      { transform: translateY(-14%) rotate(-5deg); }
+  }
+  @media (max-width: 768px) {
+    .phrase-item { font-size: clamp(1.15rem, 5vw, 1.6rem); white-space: normal; }
+  }
+
+  /* BRAND CTA */
+  .brand-cta {
+    background: #000;
+    position: relative;
+    height: 220vh;
+  }
+  .brand-cta-sticky {
+    position: sticky; top: 0;
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .brand-cta-inner {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 0;
+    width: 100%; padding: 0 2rem;
+    transition: transform 0.1s ease;
+    will-change: transform;
+  }
+  /* Logo + tagline group */
+  .brand-cta-top {
+    display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+    transform-origin: center center;
+    transition: transform 0.1s ease, opacity 0.1s ease;
+    will-change: transform, opacity;
+  }
+  .brand-cta-logo { height: 90px; width: auto; }
+  .brand-cta-en {
+    font-size: 0.88rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); font-weight: 400;
+  }
+  /* Headline + CTA group */
+  .brand-cta-bottom {
+    margin-top: 2.8rem;
+    display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.05s ease, transform 0.05s ease;
+    will-change: opacity, transform;
+  }
+  .brand-cta-h2 {
+    font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 700;
+    color: #fff; line-height: 1.35; letter-spacing: -0.02em;
+  }
+  .brand-cta-btn {
+    display: inline-block;
+    background: var(--orange); color: #fff;
+    padding: 1rem 2.8rem; border-radius: 3rem;
+    font-size: 1rem; font-weight: 600; text-decoration: none;
+    transition: opacity 0.2s; letter-spacing: 0.01em;
+  }
+  .brand-cta-btn:hover { opacity: 0.85; }
+
+  /* PRESS */
+  .press { background: var(--ink); color: var(--white); }
+  .press .sec-label { color: var(--orange); }
+  .press .sec-label::before { background: var(--orange); }
+  .press h2 { color: var(--white); }
+  .press-list { margin-top: 3rem; }
+  .press-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.8rem 0; border-bottom: 0.5px solid rgba(255,255,255,0.07); text-decoration: none; color: inherit; transition: all 0.2s; }
+  .press-item:last-child { border-bottom: none; }
+  .press-item:hover .press-title { color: var(--orange); }
+  .press-n { font-size: 0.9rem; color: rgba(255,255,255,0.22); min-width: 1.8rem; padding-top: 2px; font-weight: 300; }
+  .press-title { font-size: 1rem; font-weight: 400; line-height: 1.55; transition: color 0.2s; flex: 1; }
+  .press-arr { color: rgba(255,255,255,0.22); align-self: center; transition: all 0.2s; }
+  .press-item:hover .press-arr { transform: translate(3px,-3px); color: var(--orange); }
+
+  /* FAQ */
+  .faq { background: var(--bg); }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 3.5rem; }
+  .faq-item { padding: 1.8rem; border: 0.5px solid var(--border); border-radius: 1rem; transition: all 0.2s; }
+  .faq-item:hover { border-color: var(--purple); background: var(--lavender); }
+  .faq-q { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.9rem; line-height: 1.5; }
+  .faq-a { font-size: 0.82rem; color: var(--gray); line-height: 1.8; }
+
+  /* CTA */
+  .cta-sec { background: var(--purple); padding: 9.5rem 0; text-align: center; overflow: hidden; position: relative; }
+  .cta-bg { position: absolute; font-size: 15rem; font-weight: 900; color: rgba(255,255,255,0.055); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; line-height: 1; }
+  .cta-sec .cta-title { color: #fff; font-weight: 800; font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 0.9rem; position: relative; }
+  .cta-sec .cta-sub { color: rgba(255,255,255,0.82); font-size: clamp(1.05rem, 2.4vw, 1.35rem); font-weight: 500; margin-bottom: 0; position: relative; }
+  .btn-white { display: inline-block; background: #fff; color: var(--purple); padding: 1rem 2.8rem; border-radius: 3rem; text-decoration: none; font-size: 0.92rem; font-weight: 700; transition: all 0.25s; position: relative; }
+  .btn-white:hover { background: var(--orange); color: #fff; transform: translateY(-2px); }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; position: relative; }
+  .btn-ghost { display: inline-block; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.6); padding: 1rem 2.8rem; border-radius: 3rem; text-decoration: none; font-size: 0.92rem; font-weight: 700; transition: all 0.25s; }
+  .btn-ghost:hover { background: var(--orange); color: #fff; border-color: var(--orange); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 5rem 0 3rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+  .f-logo { font-size: 1.7rem; color: #fff; font-weight: 700; margin-bottom: 1rem; }
+  .f-logo span { color: var(--orange); }
+  footer p { font-size: 0.84rem; line-height: 1.75; max-width: 270px; }
+  .f-col h4 { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin-bottom: 1.2rem; font-weight: 700; }
+  .f-col ul { list-style: none; }
+  .f-col li { margin-bottom: 0.65rem; }
+  .f-col a { text-decoration: none; color: rgba(255,255,255,0.42); font-size: 0.86rem; transition: color 0.2s; }
+  .f-col a:hover { color: var(--orange); }
+  .socials { display: flex; gap: 0.7rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .soc { width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; text-decoration: none; color: #ffffff; transition: all 0.2s; }
+  .soc:hover { border-color: var(--orange); color: var(--orange); }
+  .soc svg { width: 16px; height: 16px; }
+
+  /* FLOATING BANNER */
+  .float-banner {
+    position: fixed; bottom: 1.8rem; left: 20px; right: 20px;
+    z-index: 200; display: flex; align-items: center; justify-content: space-between;
+    background: var(--ink); color: #fff;
+    padding: 0.9rem 1.2rem 0.9rem 1.4rem;
+    border-radius: 2rem; border: 0.5px solid #444;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+    animation: bannerIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 1s both;
+  }
+  .float-banner-left { display: flex; align-items: center; gap: 1rem; }
+  .float-banner-logo { height: 26px; width: auto; display: block; }
+  .float-banner-text { font-size: 0.9rem; font-weight: 400; color: rgba(255,255,255,0.85); }
+  .float-banner-cta { background: var(--purple); color: #fff; padding: 0.6rem 1.6rem; border-radius: 2rem; text-decoration: none; font-size: 0.85rem; font-weight: 400; transition: opacity 0.2s; flex-shrink: 0; }
+  .float-banner-cta:hover { opacity: 0.85; }
+  @keyframes bannerIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+  /* 뉴스레터 아카이브 링크 */
+  .newsletter-all-link { display: inline-block; font-size: 0.88rem; font-weight: 600; color: var(--purple); text-decoration: none; transition: color 0.2s; }
+  .newsletter-all-link:hover { color: var(--orange); }
+
+  /* staff-card link */
+  a.staff-card { text-decoration: none; color: inherit; display: block; }
+  a.staff-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  a.staff-card:hover .staff-avatar { background: var(--orange); color: #fff; }
+  .f-bottom { border-top: 0.5px solid rgba(255,255,255,0.07); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; }
+
+  /* FADE */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .hero-right { height: 55vw; }
+    .about-grid, .faq-grid { grid-template-columns: 1fr; }
+    .board-grid { grid-template-columns: 1fr 1fr; }
+    .bento { grid-template-columns: 1fr 1fr; }
+    .staff-grid, .member-blur-grid { grid-template-columns: 1fr 1fr; }
+    .alumni-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .container { padding: 0 1.5rem; }
+    .circle-outer { width: 230px; height: 230px; }
+    .circle-mid { width: 155px; height: 155px; }
+    .circle-inner { width: 88px; height: 88px; }
+    .circle-text { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="iinwelogo.svg" alt="아이인위 I in We"></a>
+  <ul class="nav-links">
+    <li><a href="#about">소개</a></li>
+    <li><a href="#programs">프로그램</a></li>
+    <li><a href="#board">게시판</a></li>
+    <li><a href="#networking">네트워킹</a></li>
+    <li><a href="#press">보도자료</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="nav-cta" target="_blank">무료 멤버십 가입</a>
+  <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<!-- MOBILE MENU -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about">소개</a>
+  <a href="#programs">프로그램</a>
+  <a href="#board">게시판</a>
+  <a href="#networking">네트워킹</a>
+  <a href="#press">보도자료</a>
+  <a href="#faq">FAQ</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="mobile-menu-cta" target="_blank">무료 멤버십 가입</a>
+</div>
+
+<!-- SCROLL STORY HERO -->
+<div class="scroll-story" id="scrollStory">
+  <div class="scroll-sticky" id="scrollSticky">
+
+    <!-- Slide 1: Female / Technical / Entrepreneurial -->
+    <div class="story-slide slide-1 active" id="slide-1">
+      <div class="s-words">
+        <div class="s-word">Female</div>
+        <div class="s-word">Technical <span>&</span></div>
+        <div class="s-word">Entrepreneurial</div>
+      </div>
+      <div class="s-desc">더 많은 여성 기술인과 창업인이 서로를 응원하는</div>
+      <div class="scroll-hint show" id="hint-1">
+        <div class="scroll-arrow"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+
+    <!-- Slide 2: Networking -->
+    <div class="story-slide slide-2" id="slide-2">
+      <div class="s-big">Network<em>ing</em></div>
+      <div class="s-desc">아이인위 커뮤니티를 통해 함께 성장하는</div>
+      <div class="scroll-hint dark" id="hint-2">
+        <div class="scroll-arrow"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+
+    <!-- Slide 3: Global -->
+    <div class="story-slide slide-3" id="slide-3">
+      <div class="s-big"><em>Global</em></div>
+      <div class="s-desc">더 넓은 세상으로 나아갈 수 있도록</div>
+    </div>
+
+    <!-- Progress dots -->
+    <div class="story-dots" id="storyDots">
+      <div class="dot active" data-slide="0"></div>
+      <div class="dot" data-slide="1"></div>
+      <div class="dot" data-slide="2"></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- 행사 사진 -->
+<section class="gallery">
+  <div class="gallery-header">
+    <div class="sec-label">행사 갤러리</div>
+    <h2>아이인위와 함께한<br>순간들</h2>
+  </div>
+  <div class="reveal-list">
+
+    <div class="reveal-item">
+      <img src="assets/image-04.jpg" alt="2026 The Tech Table">
+      <div class="reveal-caption">
+        <div class="reveal-year">2026</div>
+        <div class="reveal-title">The Tech Table</div>
+      </div>
+    </div>
+
+    <div class="reveal-item">
+      <img src="assets/image-05.jpg" alt="2026 GSSC">
+      <div class="reveal-caption">
+        <div class="reveal-year">2026</div>
+        <div class="reveal-title">Global Student Startup Competition</div>
+      </div>
+    </div>
+
+    <div class="reveal-item">
+      <img src="assets/image-06.jpg" alt="2026 GSSC">
+      <div class="reveal-caption">
+        <div class="reveal-year">2026</div>
+        <div class="reveal-title">Global Student Startup Competition</div>
+      </div>
+    </div>
+
+    <div class="reveal-item">
+      <img src="assets/image-07.jpg" alt="2025 Code Without Barriers">
+      <div class="reveal-caption">
+        <div class="reveal-year">2025</div>
+        <div class="reveal-title">Code ; Without Barriers</div>
+      </div>
+    </div>
+
+    <div class="reveal-item">
+      <img src="assets/image-08.jpg" alt="2025 Code Without Barriers">
+      <div class="reveal-caption">
+        <div class="reveal-year">2025</div>
+        <div class="reveal-title">Code ; Without Barriers</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <h2>기술 너머의 경계를<br>함께 넘어갑니다</h2>
+
+    <!-- 협업 파트너 2행 -->
+    <div class="partners-wrap fade-up" style="margin-top:3rem;">
+      <div class="partners-label">함께한 파트너사</div>
+      <!-- 마퀴 내용은 구글 시트(역대파트너)에서 자동 로드 · 아래는 폴백 -->
+      <div style="overflow:hidden; margin-bottom:0.8rem;">
+        <div class="marquee-track" id="partnersTrack1">
+          <div class="partner-logo">AWS</div>
+          <div class="partner-logo">Microsoft</div>
+          <div class="partner-logo">원티드</div>
+          <div class="partner-logo">EA</div>
+          <div class="partner-logo">아산나눔재단</div>
+          <div class="partner-logo">AWS</div>
+          <div class="partner-logo">Microsoft</div>
+          <div class="partner-logo">원티드</div>
+          <div class="partner-logo">EA</div>
+          <div class="partner-logo">아산나눔재단</div>
+        </div>
+      </div>
+      <div style="overflow:hidden;">
+        <div class="marquee-track marquee-reverse" id="partnersTrack2">
+          <div class="partner-logo">모두의연구소</div>
+          <div class="partner-logo">WISET</div>
+          <div class="partner-logo">WorldQuant</div>
+          <div class="partner-logo">GitHub</div>
+          <div class="partner-logo">모두의연구소</div>
+          <div class="partner-logo">WISET</div>
+          <div class="partner-logo">WorldQuant</div>
+          <div class="partner-logo">GitHub</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 벤토 스탯 가로 5칸 (수치는 구글 시트에서 자동 로드 · 아래는 폴백값) -->
+    <div class="bento fade-up" style="margin-top:2rem;">
+      <div class="bento-card hover-orange">
+        <div class="b-num" id="stat-events">83회</div>
+        <div class="b-label">누적 행사수</div>
+        <div class="b-sub">멘토링, 네트워킹,<br>직무 Q&A, 부트캠프, 세미나 등</div>
+      </div>
+      <div class="bento-card hover-purple">
+        <div class="b-num" id="stat-participants">2,219명</div>
+        <div class="b-label">총 참여자수</div>
+        <div class="b-sub">선정된 인원 기준</div>
+      </div>
+      <div class="bento-card hover-ink">
+        <div class="b-num" id="stat-followers">2,532명</div>
+        <div class="b-label">누적 커뮤니티</div>
+        <div class="b-sub">SNS 채널 누적</div>
+      </div>
+      <div class="bento-card hover-rose">
+        <div class="b-num" id="stat-membership">575명</div>
+        <div class="b-label">멤버십 신청</div>
+      </div>
+      <div class="bento-card hover-orange">
+        <div class="b-num" id="stat-speakers">44명</div>
+        <div class="b-label">초청 연사</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="phrase-scroll-section">
+    <div class="phrase-sticky">
+      <div class="phrase-wheel">
+        <div class="phrase-drum" id="phraseDrum">
+          <div class="phrase-item" data-index="0">테크 업계의 트렌디<span class="phrase-emoji">🎯</span>한 인사이트</div>
+          <div class="phrase-item" data-index="1">연결되고 응원하는 커뮤니티 <span class="phrase-emoji">🍀</span></div>
+          <div class="phrase-item" data-index="2">실무에 바로 쓰는 현업 스킬 <span class="phrase-emoji">🧑‍💻</span></div>
+          <div class="phrase-item" data-index="3">글로벌<span class="phrase-emoji">✈️</span> 무대에 도전할 수 있는 기회</div>
+          <div class="phrase-item" data-index="4">고민, 뉴스, 추천을 담은 정기 뉴스레터 <span class="phrase-emoji">📰</span></div>
+          <div class="phrase-item" data-index="5">관심사로 모이는 소모임 네트워킹 <span class="phrase-emoji">👀</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND CTA -->
+<section class="brand-cta">
+  <div class="brand-cta-sticky">
+    <div class="brand-cta-inner">
+      <div class="brand-cta-top">
+        <img src="iinwelogowhitered.svg" alt="아이인위" class="brand-cta-logo">
+        <p class="brand-cta-en">Tech Beyond Boundaries</p>
+      </div>
+      <div class="brand-cta-bottom">
+        <h2 class="brand-cta-h2">아이인위와 함께<br>나의 경계를 확장해보세요.</h2>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="brand-cta-btn" target="_blank">멤버십 가입하기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 게시판 -->
+<section class="board" id="board">
+  <div class="container">
+    <div class="sec-label">게시판</div>
+    <h2>한 눈에 보는<br>큐레이션 콘텐츠</h2>
+    <div class="board-tabs">
+      <button class="tab-btn active" data-tab="newsletter">📬 뉴스레터</button>
+      <!-- 템플릿/도서/아티클 탭 — 추후 활성화 예정
+      <button class="tab-btn" data-tab="template">📄 템플릿</button>
+      <button class="tab-btn" data-tab="book">📚 도서</button>
+      <button class="tab-btn" data-tab="article">✨ 추천 아티클</button>
+      -->
+    </div>
+
+    <div class="tab-panel active" id="tab-newsletter">
+      <!-- 뉴스레터는 /api/newsletters(메일침프 아카이브)에서 최신 발행일순 자동 로드 · 아래는 폴백 -->
+      <div class="board-grid fade-up" id="newsletterGrid">
+        <a class="board-card" href="http://eepurl.com/9G5BNI3S3y" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">🌿오래 나답게 성장하는 법</div><div class="card-desc">2026.06.30 발행</div><div class="card-arrow">↗</div></a>
+        <a class="board-card" href="http://eepurl.com/ETJ-U7duG6" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">당신의 상반기는 어땠나요?</div><div class="card-desc">2026.05.31 발행</div><div class="card-arrow">↗</div></a>
+        <a class="board-card" href="http://eepurl.com/klaUQejFLA" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">🤖AI가 바꾸는 세상, 나는 무엇을 준비해야 할까?</div><div class="card-desc">2026.05.03 발행</div><div class="card-arrow">↗</div></a>
+        <a class="board-card" href="http://eepurl.com/jyaY62" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">✨I in We(아이인위) 1월호: 올해의 시작선에서</div><div class="card-desc">2026.01.31 발행</div><div class="card-arrow">↗</div></a>
+        <a class="board-card" href="http://eepurl.com/jvIUEg" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">✨I in We(아이인위) 12월호: 성장으로 연결된, 우리의 2025년</div><div class="card-desc">2025.12.31 발행</div><div class="card-arrow">↗</div></a>
+        <a class="board-card" href="http://eepurl.com/jteTHs" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">✨I in We(아이인위) 11월호: 설렘으로 마무리, 재충전으로 시작</div><div class="card-desc">2025.11.30 발행</div><div class="card-arrow">↗</div></a>
+      </div>
+      <div style="text-align:center; margin-top:2rem;">
+        <a href="https://us17.campaign-archive.com/?u=0d3ce37b902413f02530f9272&id=5defb9d87c" target="_blank" class="newsletter-all-link">지난 뉴스레터 보기 →</a>
+      </div>
+    </div>
+
+    <!--
+    <div class="tab-panel" id="tab-template">
+      <div class="board-grid">
+        <div class="board-card"><span class="card-tag">템플릿</span><div class="card-title">테크 커리어 로드맵 템플릿</div><div class="card-desc">나만의 커리어 목표를 설정하고 단계별로 계획할 수 있는 실용 템플릿입니다.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag">템플릿</span><div class="card-title">포트폴리오 기획서 양식</div><div class="card-desc">개발자·디자이너·PM 등 직군별로 활용할 수 있는 포트폴리오 구성 템플릿입니다.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag">템플릿</span><div class="card-title">이력서 & 자기소개서 양식</div><div class="card-desc">테크 직군 취업에 최적화된 한국어/영어 이중 이력서 템플릿입니다.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag">템플릿</span><div class="card-title">1:1 커피챗 준비 가이드</div><div class="card-desc">현직자와의 커피챗을 최대한 활용하기 위한 질문 리스트와 기록 양식입니다.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag">템플릿</span><div class="card-title">사이드 프로젝트 기획서</div><div class="card-desc">아이디어를 실행 계획으로 구체화하는 사이드 프로젝트 기획 템플릿입니다.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag">템플릿</span><div class="card-title">주간 회고 & OKR 양식</div><div class="card-desc">목표 설정과 주간 회고를 통해 꾸준히 성장을 트래킹할 수 있는 양식입니다.</div><div class="card-arrow">↗</div></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-book">
+      <div class="board-grid fade-up">
+        <div class="board-card"><span class="card-tag gray">도서</span><div class="card-title">린 스타트업 (Eric Ries)</div><div class="card-desc">빠른 실험과 피드백으로 제품을 만드는 스타트업 방법론의 바이블.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag gray">도서</span><div class="card-title">인스파이어드 (Marty Cagan)</div><div class="card-desc">세계적인 테크 기업의 PM들이 제품을 어떻게 만드는지 배울 수 있는 책.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag gray">도서</span><div class="card-title">Designing Your Life</div><div class="card-desc">스탠퍼드 디자인 씽킹으로 나만의 커리어와 삶을 설계하는 방법.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag gray">도서</span><div class="card-title">넛지 (Richard Thaler)</div><div class="card-desc">행동경제학 관점에서 사람들의 선택을 이해하고 설계하는 통찰.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag gray">도서</span><div class="card-title">클린 코드 (Robert Martin)</div><div class="card-desc">읽기 좋고 유지보수하기 쉬운 코드를 작성하는 원칙과 실천법.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag gray">도서</span><div class="card-title">감히 리드하라 (Brené Brown)</div><div class="card-desc">취약성과 용기를 통해 진정한 리더십을 발휘하는 방법에 대한 책.</div><div class="card-arrow">↗</div></div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-article">
+      <div class="board-grid fade-up">
+        <div class="board-card"><span class="card-tag red">아티클</span><div class="card-title">테크 업계에서 여성으로 살아남기</div><div class="card-desc">현직 여성 개발자들이 직접 쓴 커리어 생존기와 성장 전략 모음.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag red">아티클</span><div class="card-title">2025 테크 트렌드 총정리</div><div class="card-desc">AI, 클라우드, 블록체인 등 올해 주목해야 할 기술 트렌드 핵심 요약.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag red">아티클</span><div class="card-title">비전공자가 개발자 되는 법</div><div class="card-desc">다양한 배경의 커리어 체인저들이 테크에 합류한 실전 경험담.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag red">아티클</span><div class="card-title">글로벌 테크 기업 취업 가이드</div><div class="card-desc">구글, 메타, 아마존 등 글로벌 기업 지원부터 합격까지의 로드맵.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag red">아티클</span><div class="card-title">PM으로 커리어 피벗하기</div><div class="card-desc">개발자, 디자이너, 기획자가 PM으로 전환하는 현실적인 방법과 준비물.</div><div class="card-arrow">↗</div></div>
+        <div class="board-card"><span class="card-tag red">아티클</span><div class="card-title">번아웃 없이 성장하는 루틴</div><div class="card-desc">지속 가능한 성장을 위한 에너지 관리와 경계 설정 가이드.</div><div class="card-arrow">↗</div></div>
+      </div>
+    </div>
+    -->
+  </div>
+</section>
+
+<!-- 네트워킹 -->
+<section class="networking" id="networking">
+  <div class="container">
+    <div class="sec-label">아이인위 네트워킹</div>
+    <h2>연결에서 시작되는<br>성장의 네트워크</h2>
+    <div class="net-tabs">
+      <button class="net-tab-btn active" data-net="staff">🏅 운영진</button>
+      <button class="net-tab-btn" data-net="members">👥 커뮤니티 멤버</button>
+    </div>
+
+    <!-- 운영진 공개 -->
+    <div class="net-panel active" id="net-staff">
+      <!-- 운영진 명단·직책·순서는 STAFF_ROSTER(스크립트)가 소스오브트루스 · 아래는 JS 실패 시 폴백(동일 내용) -->
+      <div class="staff-grid fade-up" id="staffGrid">
+        <a class="staff-card" href="https://www.linkedin.com/in/yujin-park-a452172a3" target="_blank"><div class="staff-avatar">박<img class="staff-photo" src="https://drive.google.com/thumbnail?id=19jemNthgOUgPNSETIhQG5jWm9OmzFdGj&sz=w400" alt="박유진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박유진</div><div class="staff-eng">Yujin Park</div><div class="staff-role">대표</div><div class="staff-role-en">Executive Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/chaiwon-l-714b69a5" target="_blank"><div class="staff-avatar">이<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1654AlqrcjvPWr7Jj4VOKP35F0Xc455_y&sz=w400" alt="이채원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이채원</div><div class="staff-eng">Chaiwon Lee</div><div class="staff-role">운영총괄</div><div class="staff-role-en">Deputy Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/lizlee31" target="_blank"><div class="staff-avatar">이<img class="staff-photo" src="https://drive.google.com/thumbnail?id=17qdgZ3GArJWhaFK2nDMjnlCDDbW04kqQ&sz=w400" alt="이현승" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이현승</div><div class="staff-eng">Liz Lee</div><div class="staff-role">수석 자문</div><div class="staff-role-en">Strategy Advisor</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/tay-sung/" target="_blank"><div class="staff-avatar">성<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1bWWxmRDZiBiyA2_VIpUaNe7x1ySne27N&sz=w400" alt="성태이" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">성태이</div><div class="staff-eng">Tay Sung</div><div class="staff-role">커뮤니티 개발 총괄</div><div class="staff-role-en">Community Engagement Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/sujin-park-63a29818a/" target="_blank"><div class="staff-avatar">박<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1cZ8GniLXDHQGg1mqdenhrSDdfUPSTmgb&sz=w400" alt="박수진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박수진</div><div class="staff-eng">Sujin Park</div><div class="staff-role">크리에이티브 총괄</div><div class="staff-role-en">Creative Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/jiyoung-jay-lee-456103185/" target="_blank"><div class="staff-avatar">이<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1NMGaZDe9OYAJJKwvDFkGMuiyvPuUytYm&sz=w400" alt="이지영" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이지영</div><div class="staff-eng">Jiyoung Lee</div><div class="staff-role">크리에이티브 총괄</div><div class="staff-role-en">Creative Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <div class="staff-card"><div class="staff-avatar">강<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1LrDcuz2bXzWW5SwXnKHxWup34agP0zxD&sz=w400" alt="강다한" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">강다한</div><div class="staff-eng">Dahan Kang</div><div class="staff-role">데이터·분석 총괄</div><div class="staff-role-en">Data & Analytics Director</div></div>
+        <a class="staff-card" href="https://www.linkedin.com/in/jiwon5315/" target="_blank"><div class="staff-avatar">김<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1cQW52IP3eYQN2jP2CFH7S1SbDKk5TsOW&sz=w400" alt="김지원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">김지원</div><div class="staff-eng">Jiwon Kim</div><div class="staff-role">글로벌 프로그램 총괄 · 홍보 총괄</div><div class="staff-role-en">Global Program Director · PR Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/%EC%A7%80%EC%9B%90-%EC%9E%84-a7bb96237/" target="_blank"><div class="staff-avatar">임<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1VwXTJkHhXP7Ce7ZAYVkOu51-JZiap26Y&sz=w400" alt="임지원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">임지원</div><div class="staff-eng">Jiwon Yim</div><div class="staff-role">콘텐츠 총괄</div><div class="staff-role-en">Content Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/hajin-park-52a08b231/" target="_blank"><div class="staff-avatar">박<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1vJvLmMRpPCcVjCbiz3LKnFlxsVEU_1Pk&sz=w400" alt="박하진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박하진</div><div class="staff-eng">Hajin Park</div><div class="staff-role">개발자 커뮤니티 총괄</div><div class="staff-role-en">Developer Relations Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/sysojxj" target="_blank"><div class="staff-avatar">조<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1ZbFCwiRqJZWznuplwgtHbBkNs92-yMSK&sz=w400" alt="조유진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">조유진</div><div class="staff-eng">Yujin Cho</div><div class="staff-role">개발자 커뮤니티 총괄</div><div class="staff-role-en">Developer Relations Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/%ED%95%9C%EB%82%98-%ED%99%A9-086778308/?locale=en" target="_blank"><div class="staff-avatar">황</div><div class="staff-name">황한나</div><div class="staff-eng">Hanna Hwang</div><div class="staff-role">데이터·분석 매니저</div><div class="staff-role-en">Data & Analytics Manager</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/soyeon-you-04867b26a" target="_blank"><div class="staff-avatar">유<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1iPc87u7NFY_CBhq4dQQcwIG0GnYlDMXd&sz=w400" alt="유소연" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">유소연</div><div class="staff-eng">Soyeon You</div><div class="staff-role">테크 프로그램 매니저</div><div class="staff-role-en">Tech Program Manager</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <div class="staff-card"><div class="staff-avatar">강<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1eL0AH8KGQk2HASm9uHZnQD01kzY7rnqb&sz=w400" alt="강여울" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">강여울</div><div class="staff-eng">Yul Kang</div><div class="staff-role">멤버십 매니저</div><div class="staff-role-en">Membership Manager</div></div>
+      </div>
+      <p class="staff-note">* 운영진 정보는 모두에게 공개됩니다. 카드를 클릭하면 LinkedIn 프로필로 이동합니다.</p>
+
+      <!-- 알럼나이 · 알럼나이 전용 시트에서 자동 로드(renderAlumni) · 아래는 폴백 -->
+      <div class="alumni-block fade-up">
+        <div class="alumni-title">🎓 알럼나이</div>
+        <p class="alumni-sub">아이인위를 함께 만들어온 전 운영진 분들입니다. 지금도 든든한 네트워크로 이어져 있습니다.</p>
+        <div class="alumni-grid" id="alumniGrid">
+          <a class="alumni-card" href="https://www.linkedin.com/in/jieunjudykim" target="_blank"><p class="alumni-quote">아이인위에서 만난 분들에게서 커리어의 희망과 가능성, 그리고 따뜻함을 느낍니다. 멋진 사람들과 함께한 시간을 떠올리면서 때때로 용기를 낼 수 있었고, 그 덕분에 지금의 저도 용감한 여정을 걷고 있습니다.</p><div class="alumni-foot"><div class="alumni-avatar" style="background:#EDE3FF;color:#6400C8">JK</div><div class="alumni-meta"><div class="alumni-name">김지은</div><div class="alumni-eng">Jieun Kim</div><div class="alumni-role">Instructor | Helping professionals, students, and job seekers build practical skills in applying AI, workflow automation, data analysis, and dashboard visualization</div><span class="alumni-link">LinkedIn ↗</span></div></div></a>
+          <a class="alumni-card" href="https://www.linkedin.com/in/micherokim/" target="_blank"><p class="alumni-quote">아이인위에서 좋은사람을 만나고 좋은사람들과 배울수있었습니다.</p><div class="alumni-foot"><div class="alumni-avatar" style="background:#DCE9FF;color:#2560C4">MK</div><div class="alumni-meta"><div class="alumni-name">김서현</div><div class="alumni-eng">Michelle Kim</div><div class="alumni-role">Law student</div><span class="alumni-link">LinkedIn ↗</span></div></div></a>
+          <a class="alumni-card" href="https://www.linkedin.com/in/starrybitna" target="_blank"><p class="alumni-quote">아이인위에서 좋은 사람들을 만나 함께 배우고 성장할 수 있어 정말 좋았습니다. 서로의 도전을 응원해 주는 따뜻한 분위기 덕분에 저도 더 힘을 얻고 새로운 영감도 많이 받을 수 있었습니다. 앞으로도 좋은 인연으로 함께해요. 💚 아이인위 화이팅!</p><div class="alumni-foot"><div class="alumni-avatar" style="background:#D6F1E2;color:#1E875A">LB</div><div class="alumni-meta"><div class="alumni-name">이빛나</div><div class="alumni-eng">Lee Bitna</div><div class="alumni-role">Instructor helping people create better content and workflows through AI, Figma, Photoshop, and design education.</div><span class="alumni-link">LinkedIn ↗</span></div></div></a>
+          <a class="alumni-card" href="https://www.linkedin.com/in/jaelyungkim/" target="_blank"><p class="alumni-quote">아이인위에서 만난 사람들과의 대화는 늘 좋은 자극이 되었습니다. 함께 배우고 서로의 도전을 응원하는 분위기 덕분에, 지금도 더 좋은 제품을 만들기 위해 꾸준히 도전할 수 있는 힘을 얻고 있습니다.</p><div class="alumni-foot"><div class="alumni-avatar" style="background:#FFE0D9;color:#E23A22">JK</div><div class="alumni-meta"><div class="alumni-name">김재령</div><div class="alumni-eng">Jaelyung Kim</div><div class="alumni-role">Indie App Developer</div><span class="alumni-link">LinkedIn ↗</span></div></div></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 커뮤니티 멤버 잠금 -->
+    <div class="net-panel" id="net-members">
+      <div class="member-lock">
+        <div class="member-blur-grid">
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+          <div class="member-blur-card"><div class="blur-avatar"></div><div class="blur-line"></div><div class="blur-line short"></div></div>
+        </div>
+        <div class="member-overlay">
+          <div class="lock-icon">🔒</div>
+          <div class="lock-title">멤버십 한정 공개</div>
+          <div class="lock-desc">커뮤니티 멤버 정보는 아이인위 멤버십 회원에게만 공개됩니다. 무료로 가입하고 네트워크를 시작해보세요!</div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="btn-lock" target="_blank">무료 멤버십 가입하기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press" id="press">
+  <div class="container">
+    <div class="sec-label">보도자료</div>
+    <h2>미디어가 주목한<br>아이인위</h2>
+    <div class="press-list fade-up" id="pressList">
+      <a class="press-item" href="http://www.itdaily.kr/news/articleView.html?idxno=238900" target="_blank"><span class="press-n">01</span><span class="press-title">더 테크 테이블 ‘Speaking with Clarity and Impact’ 개최</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://www.koreadaily.com/article/20260414215127839" target="_blank"><span class="press-n">02</span><span class="press-title">The Tech Table Hosts Event Focused on Communication Skills for Women in Tech</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://www.pinpointnews.co.kr/news/articleView.html?idxno=387313" target="_blank"><span class="press-n">03</span><span class="press-title">이화여대, 여성 AI 창업 활성화 위한 ‘2025 여성기술창업포럼’ 개최</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://www.hankyung.com/article/202505305965O" target="_blank"><span class="press-n">04</span><span class="press-title">'글로벌 학생 창업 경진대회' 성료 - 한국경제</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://edu.donga.com/news/articleView.html?idxno=87990" target="_blank"><span class="press-n">05</span><span class="press-title">이화여대, 제1회 글로벌 학생 창업 경진대회 개최</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://www.itbiznews.com/news/articleView.html?idxno=169114" target="_blank"><span class="press-n">06</span><span class="press-title">‘아시안리더십콘퍼런스’, 글로벌 학생 창업 경진대회(GSSC) 개최</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://www.hankyung.com/article/202505191347O" target="_blank"><span class="press-n">07</span><span class="press-title">조선일보, '2025 아시안리더십콘퍼런스'서 첫 글로벌 학생 창업 경진대회 개최</span><span class="press-arr">↗</span></a>
+      <a class="press-item" href="https://www.epnc.co.kr/news/articleView.html?idxno=316668" target="_blank"><span class="press-n">08</span><span class="press-title">조선일보, ‘아시안리더십콘퍼런스’ 내 글로벌 학생 창업 경진대회(GSSC) 개최</span><span class="press-arr">↗</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="sec-label">자주 묻는 질문</div>
+    <h2>궁금한 점이<br>있으신가요?</h2>
+    <div class="faq-grid fade-up">
+      <div class="faq-item"><div class="faq-q">Q. 행사 선정 기준은 무엇인가요?</div><div class="faq-a">제출해주신 신청서를 바탕으로 행사 취지와 가장 방향이 맞는 분들을 우선으로 선정하고 있습니다. 아이인위에서 주최하는 다른 행사에서 무통보 불참여를 했을 경우 다음 행사 참여가 어려울 수 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q">Q. 모든 행사 중복 참여가 가능한가요?</div><div class="faq-a">행사의 성격에 따라 중복 참여 여부가 나뉩니다. 자세한 사항은 개별 행사 안내문을 참고해주세요.</div></div>
+      <div class="faq-item"><div class="faq-q">Q. 운영진 모집은 언제 이뤄지나요?</div><div class="faq-a">연 2회 상반기/하반기에 운영진 모집을 진행하고 있습니다. 모집 인원은 시기에 따라 변동이 있습니다.</div></div>
+      <div class="faq-item"><div class="faq-q">Q. 오픈 카카오톡 방에서 홍보를 진행해도 되나요?</div><div class="faq-a">가능하나 오픈 카카오톡 방 홍보 가이드라인을 참고하여 진행 부탁드립니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-bg">I in We</div>
+  <div class="container">
+    <h2 class="cta-title">Tech Beyond Boundaries</h2>
+    <p class="cta-sub">아이인위와 함께 시작하세요.</p>
+    <div class="cta-btns">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="btn-white" target="_blank">무료 멤버십 가입하기</a>
+      <a href="mailto:info@iinwe.org?subject=협업 문의" class="btn-ghost">협업 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<!-- FLOATING BANNER -->
+<div class="float-banner" id="floatBanner">
+  <div class="float-banner-left">
+    <img src="iinwelogowhitered.svg" alt="아이인위" class="float-banner-logo">
+    <div class="float-banner-text">현재 모집 중인 행사는?</div>
+  </div>
+  <a href="https://event-us.kr/iinwe/event" class="float-banner-cta" target="_blank">확인하기</a>
+</div>
+
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="f-logo">I<span>in</span>We</div>
+        <p>아이인위(I in We)는 모두가 성장할 수 있는 문화를 모든 기업에 전파하고자 합니다.<br><br>(I) 개인이 먼저 본보기가 되고<br>(We) 개인이 속한 조직의 강점을 극대화하여 선한 영향력의 문화를 전파하는 것을 목표로 합니다.<br><br>아이인위는 다양한 구성원들이 안전한 공간에서 대화를 나누며 함께 성장할 수 있도록 지원합니다.</p>
+        <div class="socials">
+          <a href="https://www.linkedin.com/company/i-in-we-tech-beyond-boundaries" class="soc" target="_blank" title="LinkedIn">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://x.com/iinwetech" class="soc" target="_blank" title="X">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.849L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/iinwetech/" class="soc" target="_blank" title="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://blog.naver.com/iinwetech" class="soc" target="_blank" title="Naver Blog">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z"/></svg>
+          </a>
+          <a href="https://linktr.ee/iinwe" class="soc" target="_blank" title="Linktree">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>바로가기</h4>
+        <ul>
+          <li><a href="#about">소개</a></li>
+          <li><a href="#board">게시판</a></li>
+          <li><a href="#networking">네트워킹</a></li>
+          <li><a href="#programs">프로그램</a></li>
+          <li><a href="#press">보도자료</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>연락하기</h4>
+        <ul>
+          <li><a href="mailto:info@iinwe.org">info@iinwe.org</a></li>
+          <li><a href="https://linktr.ee/iinwe" target="_blank">링크트리 모아보기</a></li>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" target="_blank">멤버십 신청</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 아이인위 IinWe. All rights reserved.</span>
+      <span>모든 콘텐츠는 출처를 명확히 밝히고 비영리 목적으로만 사용할 수 있습니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── MOBILE NAV (햄버거 메뉴) ──
+  (function() {
+    const toggle   = document.getElementById('navToggle');
+    const menu     = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('mobileMenuBackdrop');
+    if (!toggle || !menu) return;
+
+    function setOpen(open) {
+      toggle.classList.toggle('open', open);
+      menu.classList.toggle('open', open);
+      if (backdrop) backdrop.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    toggle.addEventListener('click', () => setOpen(!menu.classList.contains('open')));
+    if (backdrop) backdrop.addEventListener('click', () => setOpen(false));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  })();
+
+  // ── SCROLL STORY ──
+  const story = document.getElementById('scrollStory');
+  const slides = document.querySelectorAll('.story-slide');
+  const dots = document.querySelectorAll('.story-dots .dot');
+  let current = 0;
+
+  function goTo(idx) {
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit');
+    setTimeout(() => slides[current].classList.remove('exit'), 700);
+    current = idx;
+    slides[current].classList.add('active');
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.classList.toggle('dark-dot', current === 1);
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    const rect = story.getBoundingClientRect();
+    const total = story.offsetHeight - window.innerHeight;
+    const scrolled = -rect.top;
+    const progress = Math.max(0, Math.min(1, scrolled / total));
+
+    let idx = 0;
+    if (progress >= 0.66) idx = 2;
+    else if (progress >= 0.33) idx = 1;
+
+    if (idx !== current) goTo(idx);
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.slide);
+      const total = story.offsetHeight - window.innerHeight;
+      const target = story.offsetTop + (idx / 3) * total;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    });
+  });
+
+  // ── PHRASE WHEEL (iOS picker style) ──
+  (function() {
+    const section = document.querySelector('.phrase-scroll-section');
+    const drum    = document.getElementById('phraseDrum');
+    const items   = drum ? drum.querySelectorAll('.phrase-item') : [];
+    const total   = items.length;
+    if (!section || !drum || !total) return;
+
+    let itemH = 0;
+    function getItemH() {
+      itemH = items[0] ? items[0].offsetHeight : 80;
+    }
+    getItemH();
+    window.addEventListener('resize', getItemH);
+
+    function update() {
+      const rect     = section.getBoundingClientRect();
+      const scrolled = -rect.top;
+      const range    = rect.height - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, scrolled / range));
+
+      // active index 0‥total-1
+      const raw    = progress * (total - 1);
+      const active = Math.round(raw);
+
+      // shift drum so the active item sits at the true vertical centre.
+      // 드럼 전체가 flex로 중앙 정렬돼 있어(중심 = 인덱스 (total-1)/2),
+      // 그 초기 중심 오프셋을 함께 보정해야 활성 문구가 화면 정중앙에 온다.
+      const offset = ((total - 1) / 2 - active) * itemH;
+      drum.style.transform = `translateY(${offset}px)`;
+
+      items.forEach((el, i) => {
+        el.classList.remove('active', 'near');
+        const dist = Math.abs(i - active);
+        if (dist === 0) el.classList.add('active');
+        else if (dist === 1) el.classList.add('near');
+      });
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ── BRAND CTA: 스크롤 연동 (로고 크게 → 살짝 축소 → 헤드라인+버튼 등장) ──
+  (function() {
+    const section = document.querySelector('.brand-cta');
+    if (!section) return;
+    const inner  = section.querySelector('.brand-cta-inner');
+    const top    = section.querySelector('.brand-cta-top');
+    const bottom = section.querySelector('.brand-cta-bottom');
+    if (!inner || !top || !bottom) return;
+
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const lerp  = (a, b, t) => a + (b - a) * t;
+
+    function update() {
+      const rect  = section.getBoundingClientRect();
+      const range = section.offsetHeight - window.innerHeight;
+      const progress = clamp(-rect.top / range, 0, 1);
+
+      // 1) 로고+태그라인: 처음엔 크게, 스크롤하며 살짝 작아짐 (progress 0 → 0.45)
+      const pA = clamp(progress / 0.45, 0, 1);
+      top.style.transform = `scale(${lerp(1.45, 1, pA)})`;
+
+      // 처음엔 헤드라인 자리를 비워 로고가 화면 중앙에 오도록 inner를 내렸다가 원위치
+      const bottomH = bottom.offsetHeight;
+      inner.style.transform = `translateY(${lerp(bottomH / 2, 0, pA)}px)`;
+
+      // 2) 헤드라인 + 버튼: 자연스럽게 페이드/슬라이드 등장 (progress 0.4 → 0.85)
+      const pB = clamp((progress - 0.4) / 0.45, 0, 1);
+      bottom.style.opacity = pB;
+      bottom.style.transform = `translateY(${lerp(36, 0, pB)}px)`;
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ── SCROLL REVEAL GALLERY ──
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.08}s`;
+    revealObserver.observe(el);
+  });
+
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // ── 네트워킹 탭 ──
+  document.querySelectorAll('.net-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.net-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.net-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('net-' + btn.dataset.net).classList.add('active');
+    });
+  });
+
+  // ── 스크롤 애니메이션 ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i * 0.08) + 's';
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ───────────────────────────────────────────────────────────
+  //  GOOGLE SHEET DATA  (점진적 향상: 실패 시 위 폴백값 유지)
+  //  시트: 링크 보기 공개 · gviz CSV 엔드포인트로 탭 직접 fetch
+  // ───────────────────────────────────────────────────────────
+  const SHEET_ID = '1ZjeI_E_-aH-QUgzJF4KwA7zZV_s8K47mIog6ZhQWBdE';
+  const STAFF_SHEET_ID = '1MNK6xOEDrqpQ2f-RN0K0jRt--MLqIQrgYS5mwC81yOA'; // 운영진(별도 시트)
+  const ALUMNI_SHEET_ID = '1r_pwZgBi4kzLo706kG0HfqZZ7e4oTVRADKsrTbGDFuE'; // 알럼나이(별도 시트)
+
+  // 운영진 얼굴 사진 (구글 드라이브 폴더 "운영진 사진", 링크 공개). 이름 → 파일 ID.
+  //   시트에 '사진' 열이 있으면 그 값이 우선(driveThumb). 열이 없거나 비면 이 맵으로 폴백.
+  //   폴더: https://drive.google.com/drive/folders/1C0Y5xvzhu384U224EC0kKZ55IhCSN3iq
+  const STAFF_PHOTOS = {
+    '강다한': '1LrDcuz2bXzWW5SwXnKHxWup34agP0zxD',
+    '강여울': '1eL0AH8KGQk2HASm9uHZnQD01kzY7rnqb',
+    '김지원': '1cQW52IP3eYQN2jP2CFH7S1SbDKk5TsOW',
+    '박수진': '1cZ8GniLXDHQGg1mqdenhrSDdfUPSTmgb',
+    '박유진': '19jemNthgOUgPNSETIhQG5jWm9OmzFdGj',
+    '박하진': '1vJvLmMRpPCcVjCbiz3LKnFlxsVEU_1Pk',
+    '성태이': '1bWWxmRDZiBiyA2_VIpUaNe7x1ySne27N',
+    '유소연': '1iPc87u7NFY_CBhq4dQQcwIG0GnYlDMXd',
+    '이지영': '1NMGaZDe9OYAJJKwvDFkGMuiyvPuUytYm',
+    '이채원': '1654AlqrcjvPWr7Jj4VOKP35F0Xc455_y',
+    '이현승': '17qdgZ3GArJWhaFK2nDMjnlCDDbW04kqQ',
+    '임지원': '1VwXTJkHhXP7Ce7ZAYVkOu51-JZiap26Y',
+    '조유진': '1ZbFCwiRqJZWznuplwgtHbBkNs92-yMSK',
+  };
+
+  // 운영진 명단·직책 (표시 순서 = 이 배열 순서). 코드가 소스오브트루스이며 시트의 '담당'·'활동여부'보다 우선.
+  //   사진은 여전히 시트 '사진' 열 → STAFF_PHOTOS 순으로, LinkedIn·영문이름은 시트에서 자동 보강.
+  const STAFF_ROSTER = [
+    { name: '박유진', ko: '대표', en: 'Executive Director' },
+    { name: '이채원', ko: '운영총괄', en: 'Deputy Director' },
+    { name: '이현승', ko: '수석 자문', en: 'Strategy Advisor' },
+    { name: '성태이', ko: '커뮤니티 개발 총괄', en: 'Community Engagement Director' },
+    { name: '박수진', ko: '크리에이티브 총괄', en: 'Creative Director' },
+    { name: '이지영', ko: '크리에이티브 총괄', en: 'Creative Director' },
+    { name: '강다한', ko: '데이터·분석 총괄', en: 'Data & Analytics Director' },
+    { name: '김지원', ko: '글로벌 프로그램 총괄 · 홍보 총괄', en: 'Global Program Director · PR Director' },
+    { name: '임지원', ko: '콘텐츠 총괄', en: 'Content Director' },
+    { name: '박하진', ko: '개발자 커뮤니티 총괄', en: 'Developer Relations Director' },
+    { name: '조유진', ko: '개발자 커뮤니티 총괄', en: 'Developer Relations Director' },
+    { name: '황한나', ko: '데이터·분석 매니저', en: 'Data & Analytics Manager' },
+    { name: '유소연', ko: '테크 프로그램 매니저', en: 'Tech Program Manager' },
+    { name: '강여울', ko: '멤버십 매니저', en: 'Membership Manager' },
+  ];
+  // 값(바 파일 ID · /file/d/ID · open?id=ID · uc?id=ID · lh3.../d/ID 등)에서 드라이브 파일 ID 추출
+  function driveId(v) {
+    v = (v || '').trim(); if (!v) return '';
+    const m = v.match(/\/file\/d\/([a-zA-Z0-9_-]{20,})/)
+      || v.match(/[?&]id=([a-zA-Z0-9_-]{20,})/)
+      || v.match(/googleusercontent\.com\/d\/([a-zA-Z0-9_-]{20,})/)
+      || v.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+    if (m) return m[1];
+    return /^[a-zA-Z0-9_-]{20,}$/.test(v) ? v : '';
+  }
+  // 공개 드라이브 파일을 핫링크 가능한 썸네일 URL로. (익명 200 확인됨)
+  function driveThumb(v) { const id = driveId(v); return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w400` : ''; }
+  // 사진 아바타 HTML: 이미지가 있으면 얹고, 로드 실패 시 이미지 제거 → 이름 첫 글자 폴백
+  function staffAvatar(name, thumb) {
+    const letter = esc((name || '').charAt(0));
+    const img = thumb
+      ? `<img class="staff-photo" src="${esc(thumb)}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`
+      : '';
+    return `<div class="staff-avatar">${letter}${img}</div>`;
+  }
+
+  // 따옴표·줄바꿈·콤마를 처리하는 최소 CSV 파서
+  function parseCSV(text) {
+    const rows = []; let row = [], field = '', inQ = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (inQ) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else inQ = false; }
+        else field += c;
+      } else if (c === '"') { inQ = true; }
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+      else if (c !== '\r') { field += c; }
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  async function fetchTab(name) {
+    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}`;
+    const res = await fetch(url, { cache: 'no-store' }); // 항상 시트 최신본을 받도록 브라우저 캐시 미사용
+    if (!res.ok) throw new Error(`fetch "${name}" → ${res.status}`);
+    return parseCSV(await res.text());
+  }
+
+  // 헬퍼들
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const fmt = n => Number(n).toLocaleString('en-US');
+  const toNum = v => { if (v == null) return null; const m = String(v).match(/\d[\d,]*(\.\d+)?/); return m ? parseFloat(m[0].replace(/,/g, '')) : null; };
+  function headerRow(rows, pred) { for (let i = 0; i < Math.min(rows.length, 8); i++) if (rows[i].some(pred)) return i; return -1; }
+  const colIndex = (hdr, pred) => hdr.findIndex(pred);
+  function setText(id, txt) { const el = document.getElementById(id); if (el) el.textContent = txt; }
+
+  // 1) 수치 — 누적 행사수 · 총 참여자수 (행사이력)
+  async function renderEventStats() {
+    const rows = await fetchTab('행사이력');
+    const hi = headerRow(rows, h => h && h.includes('행사명 (국문)'));
+    if (hi < 1) return;
+    const hdr = rows[hi];
+    const titleIdx = colIndex(hdr, h => h && h.includes('행사명 (국문)'));
+    const photoIdx = colIndex(hdr, h => h && h.includes('사진첩'));
+    const data = rows.slice(hi + 1);
+    const totals = rows[hi - 1] || [];
+    // 누적 행사수: 단체가 유지하는 합계 행 값 우선, 없으면 제목 있는 행 라이브 카운트
+    const events = toNum(totals[titleIdx]) || data.filter(r => (r[titleIdx] || '').trim()).length;
+    if (events) setText('stat-events', events + '회');
+    // 참석자 수: 사진첩 컬럼 +3 위치(헤더 없음). 합계 행(헤더 윗줄) 우선, 없으면 라이브 합산
+    if (photoIdx >= 0) {
+      const attIdx = photoIdx + 3;
+      let participants = toNum(totals[attIdx]);
+      if (!participants) participants = data.reduce((s, r) => s + (toNum(r[attIdx]) || 0), 0);
+      if (participants) setText('stat-participants', fmt(participants) + '명');
+    }
+  }
+
+  // 2) 수치 — 초청 연사 (역대연사: '이름' 컬럼들 중복제거)
+  async function renderSpeakers() {
+    const rows = await fetchTab('역대연사');
+    const hi = headerRow(rows, h => h === '이름');
+    if (hi < 0) return;
+    const cols = rows[hi].map((h, i) => h === '이름' ? i : -1).filter(i => i >= 0);
+    const names = new Set();
+    rows.slice(hi + 1).forEach(r => cols.forEach(i => { const v = (r[i] || '').trim(); if (v) names.add(v); }));
+    if (names.size) setText('stat-speakers', names.size + '명');
+  }
+
+  // 3) 수치 — 누적 커뮤니티 · 멤버십 신청 (SNS, 최신 행)
+  async function renderSNS() {
+    const rows = await fetchTab('SNS');
+    const hi = headerRow(rows, h => h && h.includes('누적'));
+    if (hi < 0) return;
+    const hdr = rows[hi];
+    const cumIdx = colIndex(hdr, h => h && h.includes('누적'));
+    const memIdx = colIndex(hdr, h => h && h.includes('멤버십'));
+    const last = rows.slice(hi + 1).filter(r => r.some(c => c && c.trim())).pop();
+    if (!last) return;
+    const cum = toNum(last[cumIdx]); if (cum) setText('stat-followers', fmt(cum) + '명');
+    const mem = toNum(last[memIdx]); if (mem) setText('stat-membership', fmt(mem) + '명');
+  }
+
+  // 4) 파트너사 마퀴 (역대파트너: 후원사 1·2·3 중복제거, 빈도순)
+  function fillMarquee(id, items) {
+    const el = document.getElementById(id);
+    if (!el || !items.length) return;
+    const html = items.map(n => `<div class="partner-logo">${esc(n)}</div>`).join('');
+    el.innerHTML = html + html; // 끊김 없는 루프를 위해 ×2
+  }
+  async function renderPartners() {
+    const rows = await fetchTab('역대파트너');
+    const hi = headerRow(rows, h => h && h.startsWith('후원사'));
+    if (hi < 0) return;
+    const cols = rows[hi].map((h, i) => h && h.startsWith('후원사') ? i : -1).filter(i => i >= 0);
+    const counts = new Map();
+    rows.slice(hi + 1).forEach(r => cols.forEach(i => { const v = (r[i] || '').trim(); if (v) counts.set(v, (counts.get(v) || 0) + 1); }));
+    const names = [...counts.entries()].sort((a, b) => b[1] - a[1]).map(e => e[0]);
+    if (!names.length) return;
+    const half = Math.ceil(names.length / 2);
+    fillMarquee('partnersTrack1', names.slice(0, half));
+    fillMarquee('partnersTrack2', names.slice(half));
+  }
+
+  // 5) 보도자료 (언론보도_정리: 날짜 내림차순 최신 8개)
+  async function renderPress() {
+    const rows = await fetchTab('언론보도_정리');
+    const hi = headerRow(rows, h => h === 'Title');
+    if (hi < 0) return;
+    const hdr = rows[hi];
+    const ti = colIndex(hdr, h => h === 'Title');
+    const ui = colIndex(hdr, h => h === 'URL');
+    const ai = colIndex(hdr, h => h === 'Author');
+    const di = ti - 1; // Date 컬럼(헤더 비어있음): Title 바로 왼쪽
+    let items = rows.slice(hi + 1)
+      .filter(r => (r[ti] || '').trim() && (r[ui] || '').trim())
+      .map(r => ({ title: r[ti].trim(), url: r[ui].trim(), author: (r[ai] || '').trim(), date: (r[di] || '').trim() }));
+    items.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    items = items.slice(0, 8);
+    if (!items.length) return;
+    const el = document.getElementById('pressList');
+    el.innerHTML = items.map((it, idx) => {
+      const n = String(idx + 1).padStart(2, '0');
+      const au = it.author ? ` <span style="opacity:.45">— ${esc(it.author)}</span>` : '';
+      return `<a class="press-item" href="${esc(it.url)}" target="_blank"><span class="press-n">${n}</span><span class="press-title">${esc(it.title)}${au}</span><span class="press-arr">↗</span></a>`;
+    }).join('');
+  }
+
+  // 6) 운영진 — 명단·직책·순서는 STAFF_ROSTER(코드)가 소스오브트루스.
+  //    시트에서는 사진('사진' 열)·LinkedIn·영문 이름만 보강해 붙인다.
+  //    민감정보(개인 이메일·연락처·티셔츠·내부ID·비고 등)는 의도적으로 제외.
+  async function renderStaff() {
+    const url = `https://docs.google.com/spreadsheets/d/${STAFF_SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`staff fetch → ${res.status}`);
+    const rows = parseCSV(await res.text());
+    // 헤더 행: '이름'과 '담당'을 함께 가진 행
+    const hi = rows.findIndex(r => r.includes('이름') && r.some(c => c && c.trim() === '담당'));
+    if (hi < 0) return;
+    const hdr = rows[hi];
+    const find = label => hdr.findIndex(c => c && c.trim() === label);
+    const nameI = find('이름'), engI = find('이름 (영문)');
+    // '사진' 열(선택): 시트에 있으면 드라이브 링크/ID를 사진으로 사용
+    const photoI = hdr.findIndex(c => c && (c.trim().includes('사진') || /photo/i.test(c.trim())));
+    if (nameI < 0) return;
+    const normLink = u => { u = (u || '').trim(); return u ? (/^https?:\/\//.test(u) ? u : 'https://' + u) : ''; };
+    // 컬럼 위치가 행마다 어긋난 경우가 있어 LinkedIn은 행 전체에서 탐색
+    const findLinkedIn = r => normLink((r.find(c => /linkedin\.com/i.test(c || '')) || ''));
+    // 이름 → 시트 보강정보(영문·사진·LinkedIn). 활동여부와 무관하게 전 행 수집.
+    const byName = {};
+    rows.slice(hi + 1).forEach(r => {
+      const nm = (r[nameI] || '').trim();
+      if (!nm || byName[nm]) return;
+      byName[nm] = {
+        eng: engI >= 0 ? (r[engI] || '').trim() : '',
+        photo: photoI >= 0 ? (r[photoI] || '').trim() : '',
+        link: findLinkedIn(r),
+      };
+    });
+
+    const grid = document.getElementById('staffGrid');
+    if (!grid) return;
+    grid.innerHTML = STAFF_ROSTER.map(m => {
+      const info = byName[m.name] || {};
+      const eng = info.eng ? `<div class="staff-eng">${esc(info.eng)}</div>` : '';
+      const roleKo = m.ko ? `<div class="staff-role">${esc(m.ko)}</div>` : '';
+      const roleEn = m.en ? `<div class="staff-role-en">${esc(m.en)}</div>` : '';
+      const thumb = driveThumb(info.photo) || driveThumb(STAFF_PHOTOS[m.name] || '');
+      const inner = `${staffAvatar(m.name, thumb)}<div class="staff-name">${esc(m.name)}</div>${eng}${roleKo}${roleEn}`;
+      return info.link
+        ? `<a class="staff-card" href="${esc(info.link)}" target="_blank">${inner}<span class="staff-badge">LinkedIn ↗</span></a>`
+        : `<div class="staff-card">${inner}</div>`;
+    }).join('');
+  }
+
+  // 현재 '활동중'인 운영진 이름 집합 (알럼나이에서 현직 운영진을 자동 제외하는 데 사용)
+  async function fetchActiveStaffNames() {
+    try {
+      const url = `https://docs.google.com/spreadsheets/d/${STAFF_SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+      const res = await fetch(url, { cache: 'no-store' }); if (!res.ok) return new Set();
+      const rows = parseCSV(await res.text());
+      const hi = rows.findIndex(r => r.includes('이름') && r.some(c => c && c.trim() === '담당'));
+      if (hi < 0) return new Set();
+      const hdr = rows[hi];
+      const nameI = hdr.findIndex(c => c && c.trim() === '이름');
+      const actI = hdr.findIndex(c => c && c.trim() === '활동여부');
+      if (nameI < 0) return new Set();
+      const s = new Set();
+      rows.slice(hi + 1).forEach(r => {
+        const nm = (r[nameI] || '').trim();
+        const active = actI >= 0 ? (r[actI] || '').trim() : '';
+        if (nm && active === '활동중') s.add(nm);
+      });
+      return s;
+    } catch { return new Set(); }
+  }
+
+  // 알럼나이 아바타: 성 한 글자 대신 영문 이니셜(2자) + 이름 기반 고정 색상.
+  //   시트에 '사진' 열/폴더 링크가 있으면 사진을 얹고, 실패 시 이니셜로 폴백(운영진과 동일).
+  const AV_PALETTE = [
+    { bg: '#EDE3FF', fg: '#6400C8' }, { bg: '#FFE0D9', fg: '#E23A22' },
+    { bg: '#DCE9FF', fg: '#2560C4' }, { bg: '#D6F1E2', fg: '#1E875A' },
+    { bg: '#FBE7B4', fg: '#A9781A' }, { bg: '#FBD7E9', fg: '#C13E86' },
+  ];
+  function hashIdx(s, n) { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h % n; }
+  function nameInitials(eng, name) {
+    const e = (eng || '').trim();
+    if (e) return e.split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0]).join('').toUpperCase();
+    return (name || '').charAt(0);
+  }
+  function alumniAvatar(name, eng, thumb) {
+    const pal = AV_PALETTE[hashIdx(name || eng || 'x', AV_PALETTE.length)];
+    const img = thumb ? `<img class="alumni-photo" src="${esc(thumb)}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : '';
+    return `<div class="alumni-avatar" style="background:${pal.bg};color:${pal.fg}">${esc(nameInitials(eng, name))}${img}</div>`;
+  }
+
+  // 6b) 알럼나이 (전용 시트: 이름·영문명·한줄소개·링크드인·테스티모니얼)
+  //     현직 운영진(활동중)과 작성 예시 행("예시…")은 자동 제외 → 실제 전 운영진만 표시
+  async function renderAlumni() {
+    const url = `https://docs.google.com/spreadsheets/d/${ALUMNI_SHEET_ID}/gviz/tq?tqx=out:csv&gid=0`;
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`alumni fetch → ${res.status}`);
+    const rows = parseCSV(await res.text());
+    const hi = rows.findIndex(r => r.includes('이름') && r.some(c => c && c.includes('영어 이름')));
+    if (hi < 0) return;
+    const hdr = rows[hi];
+    const find = pred => hdr.findIndex(c => c && pred(c.trim()));
+    const nameI = find(c => c === '이름');
+    const engI = find(c => c.includes('영어 이름'));
+    const roleI = find(c => c.includes('소개'));
+    const linkI = find(c => c.includes('SNS') || c.includes('링크드인'));
+    const testiI = find(c => c.includes('테스티모니얼'));
+    const photoI = find(c => c.includes('사진') || /photo/i.test(c)); // 선택: 사진 열이 있으면 사용
+    if (nameI < 0) return;
+    const normLink = u => { u = (u || '').trim(); return u ? (/^https?:\/\//.test(u) ? u : 'https://' + u) : ''; };
+    const activeNames = await fetchActiveStaffNames(); // 현직 운영진 자동 제외용
+    const seen = new Set();
+    const alumni = rows.slice(hi + 1).map(r => ({
+      name: (r[nameI] || '').trim(),
+      eng: engI >= 0 ? (r[engI] || '').trim() : '',
+      role: roleI >= 0 ? (r[roleI] || '').trim() : '',
+      link: linkI >= 0 ? normLink(r[linkI]) : '',
+      testi: testiI >= 0 ? (r[testiI] || '').trim() : '',
+      photo: photoI >= 0 ? (r[photoI] || '').trim() : '',
+      example: r.some(c => /^\s*예시/.test(c || '')), // 작성 예시/템플릿 행 표시
+    })).filter(p => {
+      if (!p.name || p.example) return false;      // 예시 행 제외
+      if (activeNames.has(p.name)) return false;   // 현직 운영진 제외
+      if (seen.has(p.name)) return false;          // 이름 기준 중복 제거
+      seen.add(p.name); return true;
+    });
+    if (!alumni.length) return; // 빈 응답이면 정적 폴백 카드 유지
+    const ag = document.getElementById('alumniGrid');
+    if (!ag) return;
+    ag.innerHTML = alumni.map(p => {
+      const quote = p.testi ? `<p class="alumni-quote">${esc(p.testi)}</p>` : '';
+      const eng = p.eng ? `<div class="alumni-eng">${esc(p.eng)}</div>` : '';
+      const role = p.role ? `<div class="alumni-role">${esc(p.role)}</div>` : '';
+      const link = p.link ? `<span class="alumni-link">LinkedIn ↗</span>` : '';
+      const foot = `<div class="alumni-foot">${alumniAvatar(p.name, p.eng, driveThumb(p.photo))}`
+        + `<div class="alumni-meta"><div class="alumni-name">${esc(p.name)}</div>${eng}${role}${link}</div></div>`;
+      const inner = `${quote}${foot}`;
+      return p.link
+        ? `<a class="alumni-card" href="${esc(p.link)}" target="_blank">${inner}</a>`
+        : `<div class="alumni-card">${inner}</div>`;
+    }).join('');
+  }
+
+  // 각 섹션 독립 실행 — 하나 실패해도 나머지는 동작, 실패 시 폴백 유지
+  [renderEventStats, renderSpeakers, renderSNS, renderPartners, renderPress, renderStaff, renderAlumni]
+    .forEach(fn => Promise.resolve().then(fn).catch(e => console.warn('[sheet]', fn.name, e)));
+
+  // ───────────────────────────────────────────────────────────
+  //  NEWSLETTER (메일침프 아카이브 → /api/newsletters 프록시)
+  //  CORS 때문에 직접 fetch 불가 → 같은 출처 서버 함수가 변환해서 제공
+  // ───────────────────────────────────────────────────────────
+  async function renderNewsletters() {
+    // no-store: 브라우저가 오래된 사본을 재사용하지 않게 → 항상 엣지의 최신 데이터를 받는다.
+    const res = await fetch('/api/newsletters?count=6', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`newsletters → ${res.status}`);
+    const data = await res.json();
+    const list = (data && data.newsletters) || [];
+    if (!list.length) return; // 빈 응답이면 정적 폴백 카드 유지
+    const grid = document.getElementById('newsletterGrid');
+    if (!grid) return;
+    grid.innerHTML = list.map(n => {
+      const d = (n.date || '').replace(/-/g, '.');
+      const date = d ? `<div class="card-desc">${esc(d)} 발행</div>` : '';
+      return `<a class="board-card" href="${esc(n.url)}" target="_blank"><span class="card-tag">뉴스레터</span><div class="card-title">${esc(n.title)}</div>${date}<div class="card-arrow">↗</div></a>`;
+    }).join('');
+  }
+  Promise.resolve().then(renderNewsletters).catch(e => console.warn('[newsletter]', e));
+</script>
+</body>
+</html>
