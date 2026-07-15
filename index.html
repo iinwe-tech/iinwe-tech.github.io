@@ -457,8 +457,10 @@
   .staff-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
   .staff-card { background: var(--white); border-radius: 1.2rem; padding: 2rem 1.4rem; text-align: center; border: 0.5px solid var(--border); transition: all 0.22s; }
   .staff-card:hover { border-color: var(--orange); transform: translateY(-2px); }
-  .staff-avatar { position: relative; overflow: hidden; width: 64px; height: 64px; border-radius: 50%; background: var(--lavender); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--purple); }
-  .staff-avatar .staff-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .staff-avatar { position: relative; overflow: hidden; width: 72px; height: 72px; border-radius: 50%; background: var(--lavender); margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--purple); }
+  /* 사진은 인라인 스타일(width/height/left/top/object-position)로 사람별 얼굴 위치에 맞춰 확대·크롭됨. 원형 클리핑은 부모(overflow:hidden)가 담당. */
+  .staff-avatar .staff-photo { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+  .staff-avatar::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.08); pointer-events: none; }
   .staff-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.15rem; }
   .staff-eng { font-size: 0.72rem; color: var(--gray); margin-bottom: 0.55rem; letter-spacing: 0.01em; }
   .staff-role { font-size: 0.8rem; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 0.12rem; }
@@ -1055,20 +1057,20 @@
     <div class="net-panel active" id="net-staff">
       <!-- 운영진 명단·직책·순서는 STAFF_ROSTER(스크립트)가 소스오브트루스 · 아래는 JS 실패 시 폴백(동일 내용) -->
       <div class="staff-grid fade-up" id="staffGrid">
-        <a class="staff-card" href="https://www.linkedin.com/in/yujin-park-a452172a3" target="_blank"><div class="staff-avatar">박<img class="staff-photo" src="https://drive.google.com/thumbnail?id=19jemNthgOUgPNSETIhQG5jWm9OmzFdGj&sz=w400" alt="박유진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박유진</div><div class="staff-eng">Yujin Park</div><div class="staff-role">대표</div><div class="staff-role-en">Executive Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/chaiwon-l-714b69a5" target="_blank"><div class="staff-avatar">이<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1654AlqrcjvPWr7Jj4VOKP35F0Xc455_y&sz=w400" alt="이채원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이채원</div><div class="staff-eng">Chaiwon Lee</div><div class="staff-role">운영총괄</div><div class="staff-role-en">Deputy Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/lizlee31" target="_blank"><div class="staff-avatar">이<img class="staff-photo" src="https://drive.google.com/thumbnail?id=17qdgZ3GArJWhaFK2nDMjnlCDDbW04kqQ&sz=w400" alt="이현승" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이현승</div><div class="staff-eng">Liz Lee</div><div class="staff-role">수석 자문</div><div class="staff-role-en">Strategy Advisor</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/tay-sung/" target="_blank"><div class="staff-avatar">성<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1bWWxmRDZiBiyA2_VIpUaNe7x1ySne27N&sz=w400" alt="성태이" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">성태이</div><div class="staff-eng">Tay Sung</div><div class="staff-role">커뮤니티 개발 총괄</div><div class="staff-role-en">Community Engagement Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/sujin-park-63a29818a/" target="_blank"><div class="staff-avatar">박<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1cZ8GniLXDHQGg1mqdenhrSDdfUPSTmgb&sz=w400" alt="박수진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박수진</div><div class="staff-eng">Sujin Park</div><div class="staff-role">크리에이티브 총괄</div><div class="staff-role-en">Creative Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/jiyoung-jay-lee-456103185/" target="_blank"><div class="staff-avatar">이<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1NMGaZDe9OYAJJKwvDFkGMuiyvPuUytYm&sz=w400" alt="이지영" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이지영</div><div class="staff-eng">Jiyoung Lee</div><div class="staff-role">크리에이티브 총괄</div><div class="staff-role-en">Creative Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <div class="staff-card"><div class="staff-avatar">강<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1LrDcuz2bXzWW5SwXnKHxWup34agP0zxD&sz=w400" alt="강다한" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">강다한</div><div class="staff-eng">Dahan Kang</div><div class="staff-role">데이터·분석 총괄</div><div class="staff-role-en">Data & Analytics Director</div></div>
-        <a class="staff-card" href="https://www.linkedin.com/in/jiwon5315/" target="_blank"><div class="staff-avatar">김<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1cQW52IP3eYQN2jP2CFH7S1SbDKk5TsOW&sz=w400" alt="김지원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">김지원</div><div class="staff-eng">Jiwon Kim</div><div class="staff-role">글로벌 프로그램 총괄 · 홍보 총괄</div><div class="staff-role-en">Global Program Director · PR Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/%EC%A7%80%EC%9B%90-%EC%9E%84-a7bb96237/" target="_blank"><div class="staff-avatar">임<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1VwXTJkHhXP7Ce7ZAYVkOu51-JZiap26Y&sz=w400" alt="임지원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">임지원</div><div class="staff-eng">Jiwon Yim</div><div class="staff-role">콘텐츠 총괄</div><div class="staff-role-en">Content Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/hajin-park-52a08b231/" target="_blank"><div class="staff-avatar">박<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1vJvLmMRpPCcVjCbiz3LKnFlxsVEU_1Pk&sz=w400" alt="박하진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박하진</div><div class="staff-eng">Hajin Park</div><div class="staff-role">개발자 커뮤니티 총괄</div><div class="staff-role-en">Developer Relations Director</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/sysojxj" target="_blank"><div class="staff-avatar">조<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1ZbFCwiRqJZWznuplwgtHbBkNs92-yMSK&sz=w400" alt="조유진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">조유진</div><div class="staff-eng">Yujin Cho</div><div class="staff-role">개발자 커뮤니티 총괄</div><div class="staff-role-en">Developer Relations Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/yujin-park-a452172a3" target="_blank"><div class="staff-avatar">박<img class="staff-photo" style="width:170%;height:170%;left:-35%;top:4.1%;object-position:50% 27%" src="https://drive.google.com/thumbnail?id=19jemNthgOUgPNSETIhQG5jWm9OmzFdGj&sz=w800" alt="박유진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박유진</div><div class="staff-eng">Yujin Park</div><div class="staff-role">대표</div><div class="staff-role-en">Executive Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/chaiwon-l-714b69a5" target="_blank"><div class="staff-avatar">이<img class="staff-photo" style="width:170%;height:170%;left:-16.3%;top:-11.2%;object-position:39% 36%" src="https://drive.google.com/thumbnail?id=1654AlqrcjvPWr7Jj4VOKP35F0Xc455_y&sz=w800" alt="이채원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이채원</div><div class="staff-eng">Chaiwon Lee</div><div class="staff-role">운영총괄</div><div class="staff-role-en">Deputy Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/lizlee31" target="_blank"><div class="staff-avatar">이<img class="staff-photo" style="width:220%;height:220%;left:-55.6%;top:6%;object-position:48% 20%" src="https://drive.google.com/thumbnail?id=17qdgZ3GArJWhaFK2nDMjnlCDDbW04kqQ&sz=w800" alt="이현승" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이현승</div><div class="staff-eng">Liz Lee</div><div class="staff-role">수석 자문</div><div class="staff-role-en">Strategy Advisor</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/tay-sung/" target="_blank"><div class="staff-avatar">성<img class="staff-photo" style="width:320%;height:320%;left:-124.4%;top:-78%;object-position:54.5% 40%" src="https://drive.google.com/thumbnail?id=1bWWxmRDZiBiyA2_VIpUaNe7x1ySne27N&sz=w800" alt="성태이" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">성태이</div><div class="staff-eng">Tay Sung</div><div class="staff-role">커뮤니티 개발 총괄</div><div class="staff-role-en">Community Engagement Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/sujin-park-63a29818a/" target="_blank"><div class="staff-avatar">박<img class="staff-photo" style="width:200%;height:200%;left:-18%;top:-30%;object-position:34% 40%" src="https://drive.google.com/thumbnail?id=1cZ8GniLXDHQGg1mqdenhrSDdfUPSTmgb&sz=w800" alt="박수진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박수진</div><div class="staff-eng">Sujin Park</div><div class="staff-role">크리에이티브 총괄</div><div class="staff-role-en">Creative Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/jiyoung-jay-lee-456103185/" target="_blank"><div class="staff-avatar">이<img class="staff-photo" style="width:330%;height:330%;left:-115%;top:-138.1%;object-position:50% 57%" src="https://drive.google.com/thumbnail?id=1NMGaZDe9OYAJJKwvDFkGMuiyvPuUytYm&sz=w800" alt="이지영" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">이지영</div><div class="staff-eng">Jiyoung Lee</div><div class="staff-role">크리에이티브 총괄</div><div class="staff-role-en">Creative Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <div class="staff-card"><div class="staff-avatar">강<img class="staff-photo" style="width:200%;height:200%;left:-48%;top:1%;object-position:49% 24.5%" src="https://drive.google.com/thumbnail?id=1LrDcuz2bXzWW5SwXnKHxWup34agP0zxD&sz=w800" alt="강다한" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">강다한</div><div class="staff-eng">Dahan Kang</div><div class="staff-role">데이터·분석 총괄</div><div class="staff-role-en">Data & Analytics Director</div></div>
+        <a class="staff-card" href="https://www.linkedin.com/in/jiwon5315/" target="_blank"><div class="staff-avatar">김<img class="staff-photo" style="width:240%;height:240%;left:-55.6%;top:-41.2%;object-position:44% 38%" src="https://drive.google.com/thumbnail?id=1cQW52IP3eYQN2jP2CFH7S1SbDKk5TsOW&sz=w800" alt="김지원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">김지원</div><div class="staff-eng">Jiwon Kim</div><div class="staff-role">글로벌 프로그램 총괄 · 홍보 총괄</div><div class="staff-role-en">Global Program Director · PR Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/%EC%A7%80%EC%9B%90-%EC%9E%84-a7bb96237/" target="_blank"><div class="staff-avatar">임<img class="staff-photo" style="width:135%;height:135%;left:-17.5%;top:-1.3%;object-position:50% 38%" src="https://drive.google.com/thumbnail?id=1VwXTJkHhXP7Ce7ZAYVkOu51-JZiap26Y&sz=w800" alt="임지원" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">임지원</div><div class="staff-eng">Jiwon Yim</div><div class="staff-role">콘텐츠 총괄</div><div class="staff-role-en">Content Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/hajin-park-52a08b231/" target="_blank"><div class="staff-avatar">박<img class="staff-photo" style="width:220%;height:220%;left:-60%;top:-16%;object-position:50% 30%" src="https://drive.google.com/thumbnail?id=1vJvLmMRpPCcVjCbiz3LKnFlxsVEU_1Pk&sz=w800" alt="박하진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">박하진</div><div class="staff-eng">Hajin Park</div><div class="staff-role">개발자 커뮤니티 총괄</div><div class="staff-role-en">Developer Relations Director</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <a class="staff-card" href="https://www.linkedin.com/in/sysojxj" target="_blank"><div class="staff-avatar">조<img class="staff-photo" style="width:130%;height:130%;left:-15%;top:-4.6%;object-position:50% 42%" src="https://drive.google.com/thumbnail?id=1ZbFCwiRqJZWznuplwgtHbBkNs92-yMSK&sz=w800" alt="조유진" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">조유진</div><div class="staff-eng">Yujin Cho</div><div class="staff-role">개발자 커뮤니티 총괄</div><div class="staff-role-en">Developer Relations Director</div><span class="staff-badge">LinkedIn ↗</span></a>
         <a class="staff-card" href="https://www.linkedin.com/in/%ED%95%9C%EB%82%98-%ED%99%A9-086778308/?locale=en" target="_blank"><div class="staff-avatar">황</div><div class="staff-name">황한나</div><div class="staff-eng">Hanna Hwang</div><div class="staff-role">데이터·분석 매니저</div><div class="staff-role-en">Data & Analytics Manager</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <a class="staff-card" href="https://www.linkedin.com/in/soyeon-you-04867b26a" target="_blank"><div class="staff-avatar">유<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1iPc87u7NFY_CBhq4dQQcwIG0GnYlDMXd&sz=w400" alt="유소연" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">유소연</div><div class="staff-eng">Soyeon You</div><div class="staff-role">테크 프로그램 매니저</div><div class="staff-role-en">Tech Program Manager</div><span class="staff-badge">LinkedIn ↗</span></a>
-        <div class="staff-card"><div class="staff-avatar">강<img class="staff-photo" src="https://drive.google.com/thumbnail?id=1eL0AH8KGQk2HASm9uHZnQD01kzY7rnqb&sz=w400" alt="강여울" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">강여울</div><div class="staff-eng">Yul Kang</div><div class="staff-role">멤버십 매니저</div><div class="staff-role-en">Membership Manager</div></div>
+        <a class="staff-card" href="https://www.linkedin.com/in/soyeon-you-04867b26a" target="_blank"><div class="staff-avatar">유<img class="staff-photo" style="width:145%;height:145%;left:-25.4%;top:-9.4%;object-position:52% 41%" src="https://drive.google.com/thumbnail?id=1iPc87u7NFY_CBhq4dQQcwIG0GnYlDMXd&sz=w800" alt="유소연" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">유소연</div><div class="staff-eng">Soyeon You</div><div class="staff-role">테크 프로그램 매니저</div><div class="staff-role-en">Tech Program Manager</div><span class="staff-badge">LinkedIn ↗</span></a>
+        <div class="staff-card"><div class="staff-avatar">강<img class="staff-photo" style="width:150%;height:150%;left:-34%;top:-10%;object-position:56% 40%" src="https://drive.google.com/thumbnail?id=1eL0AH8KGQk2HASm9uHZnQD01kzY7rnqb&sz=w800" alt="강여울" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()"></div><div class="staff-name">강여울</div><div class="staff-eng">Yul Kang</div><div class="staff-role">멤버십 매니저</div><div class="staff-role-en">Membership Manager</div></div>
       </div>
       <p class="staff-note">* 운영진 정보는 모두에게 공개됩니다. 카드를 클릭하면 LinkedIn 프로필로 이동합니다.</p>
 
@@ -1430,6 +1432,32 @@
     '조유진': '1ZbFCwiRqJZWznuplwgtHbBkNs92-yMSK',
   };
 
+  // 사진마다 구도가 달라(증명사진·전신샷·행사 스냅) 중앙 크롭 시 얼굴이 잘림.
+  //   이름 → [fx, fy, z]: 얼굴 중심의 원본 내 위치(0~1)와 확대 배율. 얼굴이 원형 아바타 중앙에 오도록 크롭.
+  //   사진을 교체하면 이 값도 함께 갱신할 것 (없으면 중앙 크롭 폴백).
+  const STAFF_FOCUS = {
+    '박유진': [0.50, 0.27, 1.7],
+    '이채원': [0.39, 0.36, 1.7],
+    '이현승': [0.48, 0.20, 2.2],
+    '성태이': [0.545, 0.40, 3.2],
+    '박수진': [0.34, 0.40, 2.0],
+    '이지영': [0.50, 0.57, 3.3],
+    '강다한': [0.49, 0.245, 2.0],
+    '강여울': [0.56, 0.40, 1.5],
+    '김지원': [0.44, 0.38, 2.4],
+    '박하진': [0.50, 0.30, 2.2],
+    '유소연': [0.52, 0.41, 1.45],
+    '임지원': [0.50, 0.38, 1.35],
+    '조유진': [0.50, 0.42, 1.3],
+  };
+  // 얼굴 (fx,fy)가 아바타 중앙에 z배 확대로 오도록: 이미지 크기 z·100%, 좌상단 오프셋 (0.5 − f·z)·100%
+  function focusStyle(name) {
+    const f = STAFF_FOCUS[name]; if (!f) return '';
+    const [fx, fy, z] = f;
+    const pc = v => (Math.round(v * 1000) / 10) + '%';
+    return `width:${pc(z)};height:${pc(z)};left:${pc(0.5 - fx * z)};top:${pc(0.5 - fy * z)};object-position:${pc(fx)} ${pc(fy)}`;
+  }
+
   // 운영진 명단·직책 (표시 순서 = 이 배열 순서). 코드가 소스오브트루스이며 시트의 '담당'·'활동여부'보다 우선.
   //   사진은 여전히 시트 '사진' 열 → STAFF_PHOTOS 순으로, LinkedIn·영문이름은 시트에서 자동 보강.
   const STAFF_ROSTER = [
@@ -1459,12 +1487,13 @@
     return /^[a-zA-Z0-9_-]{20,}$/.test(v) ? v : '';
   }
   // 공개 드라이브 파일을 핫링크 가능한 썸네일 URL로. (익명 200 확인됨)
-  function driveThumb(v) { const id = driveId(v); return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w400` : ''; }
+  function driveThumb(v) { const id = driveId(v); return id ? `https://drive.google.com/thumbnail?id=${id}&sz=w800` : ''; }
   // 사진 아바타 HTML: 이미지가 있으면 얹고, 로드 실패 시 이미지 제거 → 이름 첫 글자 폴백
   function staffAvatar(name, thumb) {
     const letter = esc((name || '').charAt(0));
+    const fs = focusStyle(name);
     const img = thumb
-      ? `<img class="staff-photo" src="${esc(thumb)}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`
+      ? `<img class="staff-photo"${fs ? ` style="${fs}"` : ''} src="${esc(thumb)}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`
       : '';
     return `<div class="staff-avatar">${letter}${img}</div>`;
   }
