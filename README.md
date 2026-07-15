@@ -19,6 +19,12 @@
 
 `main`에 push하면 GitHub Actions(`.github/workflows/deploy.yml`)가 파일을 그대로 `gh-pages` 브랜치로 복사하고, GitHub Pages가 이를 서빙합니다. 별도 빌드·설치 과정이 없습니다.
 
+## 작업 저장소와의 관계
+
+- 리디자인 작업본은 [`iinwetech/Homepage`](https://github.com/iinwetech/Homepage) repo의 `index-3.html`입니다. 이 repo의 `index.html`은 그 파일에 SEO 메타·`sr-only` h1·svg 로고 경로를 얹은 것으로, **수정 시 양쪽에 함께 반영**해 주세요.
+- 운영진 사진은 구글 드라이브 썸네일 + 코드 내 `STAFF_PHOTOS`(파일 ID)·`STAFF_FOCUS`(얼굴 위치·확대 배율) 맵으로 원형 크롭됩니다. **사진을 교체하면 `STAFF_FOCUS` 값도 다시 잡아야** 얼굴이 중앙에 옵니다.
+- 뉴스레터 섹션의 `/api/newsletters` 프록시는 구 Vercel 함수라 GitHub Pages에서는 동작하지 않으며, 정적 폴백 카드가 표시됩니다(정상 동작).
+
 ## 이력 (중요)
 
 - **2026-07 이전**: Astro 기반 멀티페이지 사이트였습니다. 그 소스는 [`legacy-astro`](../../tree/legacy-astro) 브랜치에 보존되어 있습니다. `develop` 브랜치에도 옛 Astro 코드가 남아 있으니 **main에 merge하지 마세요.**
