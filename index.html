@@ -694,38 +694,63 @@
   .soc:hover { border-color: var(--orange); color: var(--orange); }
   .soc svg { width: 16px; height: 16px; }
 
-  /* FLOATING CTA */
+  /* ══════════════════════════════════════════════════════════
+     FLOATING CTA  [2026-09 수정]
+     - 3색 혼용 → 잉크 캡슐 한 톤, 호버·포커스 시 주황
+     - 우측 하단 → 하단 가운데 정렬, 볼드(800) → 450
+     - '바로가기' 라벨 삭제, 버튼 3개 유지
+     ══════════════════════════════════════════════════════════ */
   .float-banner {
-    position: fixed; right: 22px; bottom: 1.6rem;
-    z-index: 200; display: flex; align-items: center; gap: 0.45rem;
-    background: rgba(255,255,255,0.88); color: var(--ink);
-    padding: 0.42rem;
-    border-radius: 999px; border: 0.5px solid rgba(13,13,13,0.12);
-    box-shadow: 0 14px 44px rgba(13,13,13,0.18);
-    backdrop-filter: blur(18px) saturate(1.2);
+    position: fixed; left: 50%; bottom: 1.6rem; transform: translateX(-50%);
+    z-index: 200; display: inline-flex; align-items: center; gap: 0.1rem;
+    background: rgba(13,13,13,0.86);
+    backdrop-filter: blur(20px) saturate(1.3);
+    border-radius: 999px; padding: 0.34rem;
+    box-shadow: 0 14px 44px rgba(13,13,13,0.26);
     animation: bannerIn 0.6s cubic-bezier(0.34,1.56,0.64,1) 1s both;
   }
-  .float-banner-label {
-    display: inline-flex; align-items: center; gap: 0.45rem;
-    padding: 0 0.55rem 0 0.45rem;
-    color: rgba(13,13,13,0.58); font-size: 0.76rem; font-weight: 700;
-    white-space: nowrap;
-  }
-  .float-banner-label::before {
-    content: ''; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--orange); box-shadow: 0 0 0 4px rgba(255,77,55,0.12);
-  }
   .float-banner-cta {
-    color: #fff; padding: 0.74rem 1rem; border-radius: 999px;
-    text-decoration: none; font-size: 0.82rem; font-weight: 800; line-height: 1;
-    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
-    white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.85rem; font-weight: 450; letter-spacing: -0.005em; line-height: 1;
+    padding: 0.72rem 1.2rem; border-radius: 999px;
+    text-decoration: none; white-space: nowrap;
+    transition: background 0.18s ease, color 0.18s ease;
   }
-  .float-banner-cta.event { background: var(--ink); }
-  .float-banner-cta.primary { background: var(--purple); }
-  .float-banner-cta.secondary { background: var(--white); color: var(--purple); border: 0.5px solid rgba(100,0,200,0.18); }
-  .float-banner-cta:hover { background: var(--orange); color: #fff; border-color: var(--orange); transform: translateY(-1px); }
-  @keyframes bannerIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+  .float-banner-cta:hover,
+  .float-banner-cta:focus-visible { background: var(--orange); color: #fff; outline: none; }
+  .float-banner-cta:active { background: #e63d29; }
+  .float-banner-sep { width: 0.5px; height: 15px; background: rgba(255,255,255,0.16); flex-shrink: 0; }
+
+  /* 모집 중 신호 — 색을 하나 더 쓰지 않고 상태만 전달 */
+  .float-live {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--orange);
+    box-shadow: 0 0 0 3px rgba(255,77,55,0.22); flex-shrink: 0;
+    transition: background 0.18s ease, box-shadow 0.18s ease;
+  }
+  .float-banner-cta:hover .float-live,
+  .float-banner-cta:focus-visible .float-live { background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,0.28); }
+
+  @keyframes bannerIn {
+    from { opacity: 0; transform: translate(-50%, 8px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .float-banner { animation: none; }
+    .float-banner-cta, .float-live { transition: none; }
+  }
+
+  /* 모바일: 가로로 늘이지 않고 캡슐 형태 유지. 터치 영역은 세로 44px로 확보 */
+  @media (max-width: 640px) {
+    .float-banner { bottom: 14px; padding: 0.28rem; gap: 0; max-width: calc(100vw - 24px); }
+    .float-banner-cta {
+      min-height: 44px; padding: 0 0.62rem;
+      font-size: 0.75rem; gap: 0.3rem;
+    }
+  }
+  @media (max-width: 380px) {
+    .float-banner-cta { font-size: 0.72rem; padding: 0 0.5rem; letter-spacing: -0.02em; }
+  }
 
   /* 뉴스레터 아카이브 링크 */
   .newsletter-all-link { display: inline-block; font-size: 0.88rem; font-weight: 600; color: var(--purple); text-decoration: none; transition: color 0.2s; }
@@ -762,9 +787,7 @@
     .circle-inner { width: 88px; height: 88px; }
     .circle-text { font-size: 0.95rem; }
     body { padding-bottom: 76px; }
-    .float-banner { left: 12px; right: 12px; bottom: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; border-radius: 1.25rem; padding: 0.45rem; }
-    .float-banner-label { display: none; }
-    .float-banner-cta { text-align: center; padding: 0.84rem 0.3rem; font-size: 0.76rem; }
+    /* [2026-09 수정] 플로팅 배너 규칙은 위 FLOATING CTA 블록(640px·380px)으로 이동 */
   }
 </style>
 </head>
@@ -1171,18 +1194,25 @@
     <p class="cta-sub">아이인위와 함께 시작하세요.</p>
     <div class="cta-btns">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="btn-white" target="_blank">무료 멤버십 가입하기</a>
-      <a href="https://forms.gle/n6vTKBZENmFra2yb8" class="btn-ghost" target="_blank" rel="noopener">협업/연사 문의</a>
+      <!-- [2026-09 수정] 워딩 통일: 협업/연사 문의 → 협업·연사 문의 -->
+      <a href="https://forms.gle/n6vTKBZENmFra2yb8" class="btn-ghost" target="_blank" rel="noopener">협업·연사 문의</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<!-- FLOATING CTA -->
+<!-- ══════════════════════════════════════════════════════════
+     FLOATING CTA  [2026-09 수정]
+     - '바로가기' 라벨 삭제, 버튼 사이 구분선(.float-banner-sep) 추가
+     - 워딩: 모집 행사 확인 → 행사 신청 / 협업/연사 문의 → 협업·연사 문의
+     - .event/.primary/.secondary 색상 클래스 삭제 (한 톤으로 통일)
+     ══════════════════════════════════════════════════════════ -->
 <div class="float-banner" id="floatBanner">
-  <span class="float-banner-label">바로가기</span>
-  <a href="https://event-us.kr/iinwe/event" class="float-banner-cta event" target="_blank">모집 행사 확인</a>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="float-banner-cta primary" target="_blank">멤버십 가입</a>
-  <a href="https://forms.gle/n6vTKBZENmFra2yb8" class="float-banner-cta secondary" target="_blank" rel="noopener">협업/연사 문의</a>
+  <a href="https://event-us.kr/iinwe/event" class="float-banner-cta" target="_blank"><span class="float-live"></span>행사 신청</a>
+  <span class="float-banner-sep"></span>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" class="float-banner-cta" target="_blank">멤버십 가입</a>
+  <span class="float-banner-sep"></span>
+  <a href="https://forms.gle/n6vTKBZENmFra2yb8" class="float-banner-cta" target="_blank" rel="noopener">협업·연사 문의</a>
 </div>
 
 <footer id="contact">
@@ -1226,7 +1256,8 @@
           <li><a href="mailto:info@iinwe.org">info@iinwe.org</a></li>
           <li><a href="https://linktr.ee/iinwe" target="_blank">링크트리 모아보기</a></li>
           <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc37X6ZsIZai9lhW6wLuUt5qle3_wR84ucbaSv9LYsM-RkBBg/viewform" target="_blank">멤버십 신청</a></li>
-          <li><a href="https://forms.gle/n6vTKBZENmFra2yb8" target="_blank" rel="noopener">협업/연사 문의</a></li>
+          <!-- [2026-09 수정] 워딩 통일: 협업/연사 문의 → 협업·연사 문의 -->
+          <li><a href="https://forms.gle/n6vTKBZENmFra2yb8" target="_blank" rel="noopener">협업·연사 문의</a></li>
         </ul>
       </div>
     </div>
