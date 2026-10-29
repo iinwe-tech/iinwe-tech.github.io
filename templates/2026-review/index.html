@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="해낸 일도, 버텨낸 날도. 혼자 10~20분, 나의 2026년을 돌아보세요. 가입 없이 작성하고 내 기기에 저장하는 아이인위 회고 노트.">
+<title>2026 회고 노트 — 올해의 마지막 페이지 | 아이인위 I in We</title>
+<link rel="icon" type="image/svg+xml" href="/iinwelogo.svg">
+<link rel="canonical" href="https://www.iinwe.org/templates/2026-review/">
+<meta name="theme-color" content="#6400C8">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="아이인위 I in We">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="2026 회고 노트 — 올해의 마지막 페이지">
+<meta property="og:description" content="해낸 일도, 버텨낸 날도. 혼자 10~20분, 나의 한 해를 돌아보세요. 가입 없이 작성하고 내 기기에 저장하는 아이인위 회고 노트.">
+<meta property="og:url" content="https://www.iinwe.org/templates/2026-review/">
+<meta property="og:image" content="https://www.iinwe.org/assets/2026-review-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="2026 올해의 마지막 페이지 — 아이인위 회고 노트">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="2026 회고 노트 — 올해의 마지막 페이지">
+<meta name="twitter:description" content="해낸 일도, 버텨낸 날도. 혼자 10~20분, 나의 한 해를 돌아보세요.">
+<meta name="twitter:image" content="https://www.iinwe.org/assets/2026-review-og.png">
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+<style>
+:root {
+  --ink: #18131e;
+  --soft: #716a7a;
+  --paper: #fff;
+  --line: #e9e3ee;
+  --hl: #dfcaff;
+  --pale: #f7f2fc;
+  --blue: #6400c8;
+  --orange: #ff4d37;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif; font-size: 16px; line-height: 1.7; }
+button, input, textarea { font: inherit; color: inherit; }
+button, summary { cursor: pointer; }
+button { min-height: 44px; padding: 10px 20px; border: 1px solid var(--line); border-radius: 100px; background: #fff; font-size: 14px; font-weight: 600; transition: background .2s, border-color .2s; }
+button:hover { border-color: var(--blue); background: var(--pale); }
+button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+button:disabled { opacity: .45; cursor: default; }
+[hidden] { display: none !important; }
+a { color: var(--blue); text-decoration: none; }
+p { margin: 0 0 14px; }
+h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -.055em; line-height: 1.25; word-break: keep-all; }
+h1 { font-size: clamp(42px, 5.2vw, 66px); margin: 26px 0 22px; }
+h2 { font-size: clamp(30px, 3.4vw, 44px); margin: 28px 0 20px; }
+h3 { font-size: 18px; }
+.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.primary:hover { background: #5200a6; color: #fff; }
+.subtle { font-size: 13px; }
+.kicker { font-size: 11px; color: var(--blue); letter-spacing: .12em; font-weight: 700; }
+.hl { background: linear-gradient(transparent 65%, var(--hl) 65%, var(--hl) 94%, transparent 94%); }
+.lead { color: #665e70; font-size: 17px; line-height: 1.8; max-width: 44em; word-break: keep-all; }
+.small { font-size: 13px; color: var(--soft); }
+.note { margin: 24px 0; padding: 16px 20px; background: var(--pale); border-left: 3px solid var(--hl); border-radius: 0 12px 12px 0; font-size: 13px; color: #665b72; line-height: 1.8; word-break: keep-all; }
+.note b { color: #44334f; font-weight: 600; }
+.stamp { display: inline-flex; align-items: center; padding: 4px 11px; border: 1px solid var(--line); border-radius: 100px; color: var(--soft); font-size: 11px; white-space: nowrap; }
+.skip-link { position: absolute; top: -60px; left: 16px; z-index: 10; padding: 10px 20px; background: #fff; }
+.skip-link:focus { top: 12px; }
+.topbar { display: flex; align-items: center; gap: 24px; padding: 22px max(24px, calc((100vw - 1200px) / 2)); border-bottom: 1px solid var(--line); background: #fff; }
+.brand { display: inline-flex; align-items: center; flex-shrink: 0; }
+.brand-logo { width: 96px; height: 30px; display: block; }
+.edition { border-left: 1px solid var(--line); padding-left: 24px; font-size: 12px; color: var(--soft); }
+.home-link { font-size: 12px; color: var(--soft); margin-left: auto; white-space: nowrap; }
+.home-link span { margin-left: 12px; color: var(--blue); }
+.record-bar { max-width: 1200px; margin: auto; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 11px; }
+.record-edition { letter-spacing: .12em; color: var(--blue); font-weight: 700; white-space: nowrap; }
+.save-status { color: var(--soft); text-align: right; }
+.progress { height: 2px; background: #f0eaf5; }
+.progress > div { width: 14.2857%; height: 100%; background: var(--blue); transition: width .2s; }
+.shell { max-width: 1200px; margin: auto; display: grid; grid-template-columns: 210px minmax(0, 1fr); min-height: calc(100vh - 177px); }
+.sidebar { padding: 48px 26px 40px 24px; border-right: 1px solid var(--line); background: #fcfafd; }
+.sidebar ol { margin: 24px 0 30px; padding: 0; list-style: none; }
+.sidebar button { width: 100%; border: 0; border-radius: 8px; text-align: left; background: transparent; color: var(--soft); font-size: 13px; font-weight: 500; padding: 10px 12px; margin: 3px 0; }
+.sidebar button:hover { background: #f1e8fb; color: var(--blue); }
+.sidebar button[aria-current='step'] { background: #eee2fc; color: var(--blue); font-weight: 700; }
+.sidebar .num { display: inline-block; width: 28px; opacity: .6; font-size: 11px; font-variant-numeric: tabular-nums; }
+.sidebar .tiny { font-size: 11px; color: var(--soft); line-height: 1.9; }
+.mini-rule { width: 24px; height: 2px; background: var(--orange); margin: 25px 0; }
+main { min-width: 0; }
+.slide { display: none; max-width: 990px; padding: 46px 56px 48px; }
+.slide.active { display: block; animation: enter .2s ease; }
+@keyframes enter { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.slide h1:focus, .slide h2:focus { outline: none; }
+.slide-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.hero-row { display: grid; grid-template-columns: minmax(0, 1fr) 178px; gap: 28px; align-items: center; margin-top: 12px; }
+.hero-intro .lead { font-size: 15px; }
+.book-art { width: 158px; height: 222px; padding: 22px 16px 20px 25px; position: relative; display: flex; flex-direction: column; justify-content: space-between; background: var(--blue); color: #fff; border-left: 6px solid #4d009b; border-radius: 3px 13px 13px 3px; box-shadow: 8px 8px 0 var(--hl); transform: rotate(7deg); font-size: 15px; font-weight: 600; line-height: 1.4; }
+.book-art .year { font-size: 40px; font-weight: 800; letter-spacing: -.07em; }
+.book-art .book-caption { font-size: 8px; letter-spacing: .04em; line-height: 1.8; opacity: .8; }
+.book-bookmark { position: absolute; right: 19px; top: -1px; width: 13px; height: 26px; background: var(--orange); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
+.mode-picker { border: 0; padding: 0; margin: 26px 0 0; }
+.mode-picker legend { font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+.mode-options { display: flex; flex-wrap: wrap; gap: 12px; }
+.mode-choice { position: relative; display: block; cursor: pointer; flex: 1; min-width: 180px; }
+.mode-choice input { position: absolute; top: 18px; left: 16px; accent-color: var(--blue); width: 15px; height: 15px; margin: 0; }
+.mode-choice span { display: block; padding: 12px 16px 12px 43px; border: 1px solid var(--line); border-radius: 12px; background: #fff; font-size: 14px; }
+.mode-choice small { display: block; font-size: 11px; color: var(--soft); }
+.mode-choice:has(input:checked) span { background: var(--pale); border-color: var(--blue); }
+.mode-choice:has(input:focus-visible) span { outline: 3px solid var(--blue); outline-offset: 3px; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+#start { padding: 13px 28px; }
+.flow-details { border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; padding: 15px 0; background: #fff; margin: 26px 0 0; }
+.flow-details summary { color: #716579; font-size: 12px; font-weight: 500; }
+.flow { padding: 0; margin: 16px 0 0; list-style: none; }
+.flow li { display: flex; gap: 16px; padding: 8px 0; font-size: 12px; color: var(--soft); }
+.flow .time { min-width: 30px; color: var(--blue); font-weight: 600; }
+.privacy { margin: 18px 0 0; color: var(--soft); font-size: 11px; line-height: 1.9; word-break: keep-all; }
+.privacy b { color: #51465e; font-weight: 600; }
+.core { margin: 28px 0 24px; padding: 24px; border: 1px solid #e4d9ef; border-radius: 16px; background: #fcfafd; }
+.field { margin: 24px 0; }
+.core .field { margin: 0; }
+.core .field + .field { margin-top: 24px; }
+.field label { display: block; font-size: 17px; font-weight: 600; line-height: 1.6; word-break: keep-all; margin-bottom: 10px; }
+.field .hint { display: block; font-size: 12px; color: var(--soft); font-weight: 400; margin-top: 7px; }
+.field textarea, .field input { display: block; width: 100%; background: #fff; border: 1px solid #dcd4e4; border-radius: 10px; padding: 14px 16px; font-size: 16px; line-height: 1.8; resize: vertical; }
+.field textarea { min-height: 130px; }
+.field input { min-height: 48px; }
+.field input[type='date'] { max-width: 270px; }
+.field textarea:focus, .field input:focus { outline: 2px solid var(--blue); outline-offset: 2px; }
+.field textarea::placeholder, .field input::placeholder { color: #8b8194; font-size: 13px; }
+.qtag { display: inline-block; background: #eee2fc; color: var(--blue); padding: 1px 7px; border-radius: 5px; font-size: 11px; margin-right: 7px; vertical-align: 2px; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.quote { font-size: clamp(19px, 2.3vw, 25px); font-weight: 600; line-height: 1.7; padding-left: 20px; border-left: 3px solid var(--hl); margin: 28px 0; word-break: keep-all; }
+details { margin: 20px 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+summary { font-size: 13px; font-weight: 600; }
+details[open] summary { margin-bottom: 18px; }
+.question-bank .field label { font-size: 14px; }
+.question-bank textarea { min-height: 100px; }
+.help-list { color: var(--soft); font-size: 13px; padding-left: 20px; }
+.help-list li + li { margin-top: 8px; }
+.local-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 24px; margin-top: 32px; }
+.local-nav button { font-size: 13px; min-width: 90px; }
+.page-count { font-variant-numeric: tabular-nums; color: #8b8194; font-size: 11px; }
+.page-footer { display: flex; justify-content: space-between; gap: 16px; margin-top: 24px; color: #8b8194; font-size: 10px; }
+.bottom { display: flex; justify-content: space-between; gap: 16px; padding: 20px max(24px, calc((100vw - 1152px) / 2)); border-top: 1px solid var(--line); color: var(--soft); font-size: 10px; }
+.timer-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 20px 0; }
+.timer-tools button { font-size: 11px; min-height: 36px; padding: 6px 12px; color: var(--soft); }
+.timer-tools output { font-size: 16px; color: var(--blue); font-variant-numeric: tabular-nums; min-width: 45px; }
+.timer-state { font-size: 10px; color: #8b8194; }
+.timer-tools.done { background: var(--pale); padding: 8px 12px; border-radius: 12px; }
+.summary-card { border: 1px solid #e4d9ef; border-radius: 16px; background: #fcfafd; padding: 28px; margin: 28px 0; }
+.summary-card dl { margin: 0; }
+.summary-card dt { font-size: 11px; font-weight: 700; color: var(--blue); margin: 24px 0 6px; }
+.summary-card dt:first-child { margin-top: 0; }
+.summary-card dd { margin: 0; font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.summary-card dd.empty { color: #8b8194; font-size: 13px; }
+.danger { color: #9b3d34; font-size: 12px; }
+.end-mark { color: var(--orange); font-size: 26px; margin-left: 8px; }
+.print-value, .print-heading { display: none; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); max-width: 90vw; width: max-content; padding: 14px 20px; border-radius: 12px; background: #2d153f; color: #fff; font-size: 12px; z-index: 50; box-shadow: 0 4px 24px #0002; }
+@media (max-width: 1000px) {
+  .shell { grid-template-columns: 176px minmax(0, 1fr); }
+  .sidebar { padding: 36px 16px; }
+  .slide { padding: 36px 32px; }
+  .hero-row { grid-template-columns: 1fr 125px; gap: 16px; }
+  .book-art { width: 112px; height: 167px; padding: 16px; font-size: 12px; }
+  .book-art .year { font-size: 30px; }
+  .book-art .book-caption { font-size: 7px; }
+  h1 { font-size: 48px; }
+}
+@media (max-width: 700px) {
+  .topbar { padding: 20px; gap: 12px; }
+  .brand-logo { width: 83px; height: 26px; }
+  .edition { display: none; }
+  .home-link { font-size: 11px; }
+  .record-bar { padding: 12px 20px; flex-wrap: wrap; gap: 4px; }
+  .record-edition { font-size: 9px; }
+  .save-status { font-size: 10px; }
+  .shell { display: block; }
+  .sidebar { padding: 10px 14px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .sidebar > .kicker, .sidebar .tiny, .sidebar .mini-rule { display: none; }
+  .sidebar ol { display: flex; gap: 4px; margin: 0; overflow-x: auto; scrollbar-width: thin; }
+  .sidebar li { flex-shrink: 0; }
+  .sidebar button { width: auto; padding: 8px 10px; margin: 0; min-height: 44px; font-size: 11px; }
+  .sidebar .num { width: 19px; font-size: 10px; }
+  .slide { padding: 30px 22px 40px; }
+  .slide-top .kicker { font-size: 9px; letter-spacing: .1em; }
+  .stamp { font-size: 10px; }
+  .hero-row { grid-template-columns: 1fr 82px; gap: 8px; align-items: start; margin-top: 8px; }
+  h1 { font-size: 42px; margin: 20px 0; }
+  h2 { font-size: 32px; }
+  .book-art { width: 72px; height: 108px; padding: 11px 8px; margin-top: 34px; font-size: 8px; border-left-width: 3px; box-shadow: 4px 4px 0 var(--hl); border-radius: 2px 7px 7px 2px; }
+  .book-art .year { font-size: 20px; }
+  .book-art .book-caption { font-size: 4px; }
+  .book-bookmark { right: 10px; width: 7px; height: 15px; }
+  .hero-intro .lead { font-size: 13px; }
+  .lead { font-size: 15px; }
+  .note { padding: 14px 16px; font-size: 12px; margin: 22px 0; }
+  .mode-options { gap: 10px; }
+  .mode-choice { min-width: 135px; }
+  .mode-choice span { padding: 12px 9px 12px 30px; font-size: 13px; }
+  .mode-choice input { left: 10px; top: 17px; width: 13px; height: 13px; }
+  .mode-choice small { font-size: 10px; }
+  .core { padding: 18px 16px; }
+  .field label { font-size: 16px; }
+  .field textarea { min-height: 140px; }
+  .two-col { grid-template-columns: 1fr; }
+  .timer-state { flex-basis: 100%; }
+  .bottom { display: block; padding: 18px 22px; font-size: 10px; }
+  .bottom span { display: block; }
+  .summary-card { padding: 20px; }
+  .flow li { font-size: 11px; gap: 10px; }
+}
+@media (max-width: 370px) {
+  .hero-row { grid-template-columns: 1fr; }
+  .book-art { display: none; }
+  h1 { font-size: 40px; }
+  .record-bar { display: block; }
+  .save-status { display: block; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+@page { size: A4; margin: 16mm; }
+@media print {
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .topbar, .record-bar, .sidebar, .progress, .bottom, .local-nav, .timer-tools, .actions, .privacy, .mode-picker, .toast, .page-footer, .no-print, .skip-link, .flow-details { display: none !important; }
+  .shell, main { display: block; }
+  .slide, .slide.active { display: block !important; padding: 0; max-width: none; animation: none; break-after: page; }
+  .slide.skip-print { display: none !important; }
+  .slide:last-child { break-after: auto; }
+  .slide-top { margin-bottom: 12px; }
+  h1 { font-size: 32pt; } h2 { font-size: 24pt; } h3 { font-size: 14pt; }
+  .lead { font-size: 12pt; }
+  .core, .summary-card { box-shadow: none; border: 1px solid #aaa; break-inside: avoid; background: #fff; }
+  .field { break-inside: avoid; }
+  .field textarea, .field input { display: none !important; }
+  .print-value { display: block; white-space: pre-wrap; overflow-wrap: anywhere; min-height: 32px; border-bottom: 1px solid #ccc; padding: 8px 0; font-size: 11pt; }
+  details { background: #fff; }
+  details:not([data-has-answer='true']), details > summary { display: none; }
+  .field label { font-size: 12pt; } .field .hint { font-size: 10pt; }
+  .two-col { display: block; }
+  .hero-row { display: block; } .book-art { display: none; }
+  .summary-card { padding: 14px; margin: 14px 0; }
+  .summary-card dd { font-size: 10pt; } .summary-card dt { font-size: 10pt; margin: 9px 0 2px; }
+  .note { font-size: 10pt; } .stamp { font-size: 10pt; }
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">회고 본문으로 건너뛰기</a>
+<header class="topbar">
+  <a href="/" class="brand" aria-label="아이인위 홈페이지" data-site-link><svg class="brand-logo" aria-hidden="true" viewBox="0 0 728 228" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M82.0155 2.11145C73.8932 3.51907 68.2472 6.23378 65.0775 10.2556C62.1059 14.2774 60.6201 20.6117 60.6201 29.2585V179.774C60.6201 189.225 62.205 196.163 65.3747 200.587C68.5443 205.011 74.0913 207.826 82.0155 209.033V211.144H0V209.033C8.32041 207.826 13.9664 205.313 16.938 201.492C19.9096 197.47 21.3953 190.231 21.3953 179.774V29.2585C21.3953 20.2095 19.8105 13.7746 16.6408 9.95393C13.6692 6.13323 8.12231 3.51907 0 2.11145V0H82.0155V2.11145Z" fill="#6400C8"/>
+<path d="M201.984 226.778C199.394 228.85 187.222 224.707 187.74 214.865C189.035 195.181 201.725 154.001 216.488 115.929C217.006 114.634 217.006 113.598 216.488 112.303L216.229 111.785C215.711 110.749 215.452 109.195 215.97 107.9C219.337 100.649 226.589 86.6629 229.697 85.6269C233.064 84.5909 243.423 90.5478 242.905 97.0226C242.387 103.497 214.934 154.001 206.646 202.174C204.315 215.124 271.913 92.1018 311.021 92.1018C318.014 92.1018 323.193 97.2816 323.193 108.159C323.193 126.289 292.891 199.843 300.402 203.987C312.316 210.721 387.424 123.181 392.345 118.001C397.266 112.821 399.856 117.483 397.007 121.368C394.158 125.253 325.783 212.534 302.733 212.534C290.301 212.534 284.344 201.656 284.344 196.994C284.344 162.03 315.165 103.497 308.949 98.8356C296.517 89.5118 244.2 155.555 201.984 226.778Z" fill="#FF4D37"/>
+<path d="M159.702 62.0588C157.63 66.2027 149.601 60.7638 150.637 57.1379C151.673 53.512 156.853 31.4975 158.407 25.7996C159.961 20.1018 177.054 30.9795 174.723 36.4184C172.392 41.8573 161.774 57.6559 159.702 62.0588ZM120.335 213.829C112.824 213.829 105.572 210.721 105.572 198.807C105.572 174.203 119.299 129.656 124.738 119.037C125.515 117.483 125.515 116.188 125.256 114.893C124.997 113.34 123.443 112.822 124.479 110.75C130.176 99.3539 131.73 96.5049 133.543 95.9869C134.579 95.7279 136.133 95.728 137.687 96.5049C145.198 99.3539 155.04 109.714 153.227 112.822C134.579 142.088 108.162 203.728 118.004 208.39C131.989 214.865 194.666 148.304 222.896 110.75C229.112 102.462 230.666 111.268 227.817 114.376C224.968 117.483 151.414 213.829 120.335 213.829Z" fill="#FF4D37"/>
+<path d="M728 165.528C725.153 180.97 719.208 192.472 710.165 200.036C701.29 207.442 690.74 211.144 678.515 211.144C668.3 211.144 659.006 208.781 650.632 204.054C642.427 199.327 635.896 192.394 631.039 183.255C626.183 173.958 623.755 162.849 623.755 149.928C623.755 137.165 626.016 125.899 630.537 116.13C635.059 106.203 641.506 98.4818 649.879 92.9668C658.419 87.2943 668.383 84.458 679.771 84.458C688.814 84.458 696.936 86.4276 704.136 90.3669C711.337 94.3061 716.947 100.215 720.966 108.094C725.153 115.814 727.079 125.269 726.744 136.456H646.362C647.2 152.686 651.637 165.37 659.675 174.509C667.714 183.491 678.264 187.982 691.326 187.982C699.364 187.982 706.313 186.406 712.175 183.255C718.036 179.946 722.641 173.879 725.99 165.055L728 165.528ZM673.993 90.1305C665.62 90.1305 658.922 93.9122 653.898 101.476C648.874 108.881 646.362 118.887 646.362 131.493H698.359C698.526 117.311 696.433 106.912 692.079 100.294C687.725 93.5183 681.697 90.1305 673.993 90.1305Z" fill="#6400C8"/>
+<path d="M655.559 0.00012207V2.08183C648.409 3.07312 642.749 5.94785 638.578 10.706C634.606 15.4642 630.436 23.8901 626.067 35.9838L562.017 211.144H560.826L510.182 77.3205L460.73 211.144H459.539L392.212 33.3074C388.24 22.4032 384.368 14.6712 380.594 10.1113C377.019 5.55134 371.856 2.87486 365.103 2.08183V0.00012207H449.112V2.08183C443.353 2.6766 439.083 4.26266 436.302 6.84C433.522 9.2191 432.132 12.7877 432.132 17.5459C432.132 23.0971 433.621 29.6396 436.6 37.1734L476.519 147.206L505.714 66.0198L492.606 31.2257C489.23 22.3041 486.151 15.9598 483.371 12.1929C480.59 8.2278 476.32 4.85743 470.561 2.08183V0.00012207H553.08V2.08183C546.526 2.47834 541.462 4.16353 537.887 7.13739C534.511 9.91299 532.823 13.8781 532.823 19.0328C532.823 22.998 533.816 27.5579 535.802 32.7126L577.806 146.909L617.129 37.1734C619.513 31.0274 620.704 25.278 620.704 19.925C620.704 9.02084 614.051 3.07312 600.745 2.08183V0.00012207H655.559Z" fill="#6400C8"/>
+</svg>
+</a>
+  <span class="edition">나를 알아가는 회고 노트</span>
+  <a class="home-link" href="/#board" data-site-link>아이인위로 돌아가기 <span aria-hidden="true">↗</span></a>
+</header>
+<div class="record-bar"><span class="record-edition">2026 YEAR IN REVIEW</span><span id="saveStatus" class="save-status" role="status">작성 전 · 답변은 이 브라우저에만 저장돼요</span></div>
+<div class="progress" role="progressbar" aria-label="회고 진행" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1"><div id="bar"></div></div>
+<div class="shell">
+<nav class="sidebar" aria-label="회고 목차"><div class="kicker">MY 2026</div><ol id="toc"></ol><div class="mini-rule"></div><p class="tiny">다 채우지 않아도 괜찮아요.<br>지금 떠오르는 말부터.</p><p class="tiny">목차로 오가도<br>쓴 내용은 남아 있어요.</p></nav>
+<main id="main">
+<noscript><p class="note">답변 입력과 저장 기능을 사용하려면 브라우저에서 JavaScript를 켜주세요.</p></noscript>
+<section class="slide active" data-name="시작하기" data-short="시작" data-minutes="0,0" aria-hidden="false">
+<div class="slide-top"><span class="kicker">2026 · Year in review</span><span class="stamp">혼자 10~20분</span></div>
+<div class="hero-row"><div class="hero-intro"><h1>올해의<br><span class="hl">마지막 페이지</span></h1><p class="lead">올해라는 책의 마지막 장에는<br>어떤 이야기를 남기고 싶나요?</p></div><div class="book-art" aria-hidden="true"><i class="book-bookmark"></i><span class="year">2026</span><span>나를<br>알아가는<br>몇 페이지.</span><span class="book-caption">MY YEAR, MY STORY.<br>I in We · 01 → 12</span></div></div>
+<p class="lead" style="margin-top:12px">해낸 일도, 버텨낸 날도 펼쳐놓고<br>2026년 한 해를 돌아봐요.</p>
+<div class="note"><b>2026년 1월부터 12월까지.</b><br>기억에 남는 일과 달라진 나를 돌아봐요. 한 해가 끝나기 전에 쓴다면 지나온 시간부터 적고, 연말에 덧붙여도 좋아요.</div>
+<fieldset class="mode-picker"><legend>오늘 나에게 있는 시간은?</legend><div class="mode-options"><label class="mode-choice"><input type="radio" name="mode" value="10" checked=""><span><b>가볍게 10분</b><small>장마다 먼저 보이는 질문</small></span></label><label class="mode-choice"><input type="radio" name="mode" value="20"><span><b>천천히 20분</b><small>선택 질문 + 심화 한 가지</small></span></label></div></fieldset>
+
+<div class="actions"><button class="primary" id="start">내 회고 시작하기 →</button><button class="subtle" id="resume" hidden>이어서 쓰기</button></div>
+<details class="flow-details"><summary>어떤 질문을 만나나요?</summary><ul class="flow"><li><span class="time" id="flowBook">1분</span><span>올해의 제목과 기억에 남는 장면</span></li><li><span class="time" id="flowReflect">4분</span><span>잘 지나갔는지 · 잘 지냈는지 · 잘 돌봤는지</span></li><li id="flowDepthRow" hidden=""><span class="time">3분</span><span>한 걸음 더 깊게</span></li><li><span class="time">4분</span><span>앞으로 이어갈 일 하나</span></li><li><span class="time">1분</span><span>내 기록을 읽고 저장하기</span></li></ul></details>
+<p class="privacy"><b>가입 없이, 나만의 기록으로.</b> 답변은 아이인위에 제출되지 않고 지금 사용하는 브라우저에만 자동 저장돼요. 다른 기기·브라우저로는 이어지지 않으니, 마칠 때 작성본을 저장해주세요. 메일 앱 안에서 저장이 어렵다면 Safari·Chrome 등 브라우저에서 열어주세요. 공용 기기라면 저장 후 ‘이 브라우저 기록 지우기’를 눌러주세요.</p>
+</section>
+
+<section class="slide" data-name="책 제목 붙이기" data-short="제목" data-minutes="1,2" aria-hidden="true">
+<div class="slide-top"><span class="kicker">01 · Warm-up</span><span class="stamp">2026년 · 1~12월</span></div>
+<h2>내 2026년을<br><span class="hl">책 제목</span>으로 짓는다면?</h2>
+<p class="lead">사진첩이나 달력을 잠깐 열어봐도 좋아요.<br>1월부터 12월까지, 어떤 장면이 떠오르나요?</p>
+<div class="core"><div class="field"><label for="book">2026년의 이야기에 제목을 붙여주세요.<span class="hint">제목과 이유 한 줄이면 충분해요. 지어낸 제목도 좋아요.</span></label><textarea id="book" data-summary="올해의 책 제목" placeholder="예: 『생각보다 멀리 왔다』 — 처음 맡은 일을 서툴게나마 끝냈으니까."></textarea></div><div class="field"><label for="half">그 책에서 가장 기억에 남는 장면은?<span class="hint">언제, 무슨 일이 있었나요? 그 장면을 고른 이유도 적어보세요.</span></label><textarea id="half" data-summary="올해 기억에 남는 장면" placeholder="예: 혼자 해결하려던 내가 동료에게 도움을 청하기 시작한 장."></textarea></div></div>
+<details><summary>아무 장면도 떠오르지 않는다면</summary><ul class="help-list"><li>달력에서 유난히 바빴던 주나 오래 비워둔 날을 찾아보세요.</li><li>처음 해본 일, 그만둔 일, 자주 만난 사람을 떠올려보세요.</li><li>가장 최근 사진 한 장에서 시작해도 괜찮아요.</li></ul></details>
+<div class="note">올해를 한 단어로 평가하기 어려워도 괜찮아요. 제목은 오늘의 가제입니다.</div>
+</section>
+
+<section class="slide" data-name="잘 지나가고 있을까?" data-short="지나감" data-minutes="2,4" aria-hidden="true">
+<div class="slide-top"><span class="kicker">02 · Part 1</span><span class="stamp">해낸 것 · 용기 · 변화</span></div>
+<h2>나는 <span class="hl">잘 지나가고</span> 있을까?</h2>
+<p class="lead">큰 성과만 찾지 않아도 돼요.<br>계속해온 일, 도움을 구한 일, 멈추기로 한 선택도 살펴봐요.</p>
+<div class="core"><div class="field"><label for="proud"><span class="qtag">Q</span>올해 ‘나도 이런 걸 해내네’ 싶었던 순간은?<span class="hint">장면 하나와 그때 내가 한 선택을 적어보세요.</span></label><textarea id="proud" data-summary="내가 인정해주고 싶은 순간" placeholder="어떤 일이 있었고, 그 안에서 나는 무엇을 했나요?"></textarea></div></div>
+<details class="question-bank"><summary>다른 질문이 더 끌린다면 · 골라 쓰기</summary>
+<div class="field"><label for="habit">올해 자리 잡아 실제로 삶을 편하게 해준 습관은?</label><textarea id="habit" data-summary="삶을 편하게 해준 습관"></textarea></div>
+<div class="field"><label for="courage">겁이 났지만 일단 해본 일은? 해보기 전과 후에 무엇이 달라졌나요?</label><textarea id="courage" data-summary="용기 냈던 일"></textarea></div>
+<div class="field"><label for="learning">예상대로 되지 않은 일에서 새롭게 알게 된 내 방식이나 조건은?</label><textarea id="learning" data-summary="예상 밖의 일에서 배운 것"></textarea></div>
+<div class="field"><label for="futureThanks">올해 해두길 잘했다고 느끼는 선택은?</label><textarea id="futureThanks" data-summary="해두길 잘한 선택"></textarea></div>
+</details><p class="small">먼저 보이는 질문 대신, 선택 질문 하나에만 답해도 좋아요.</p>
+</section>
+
+<section class="slide" data-name="잘 지내고 있을까?" data-short="지냄" data-minutes="1,3" aria-hidden="true">
+<div class="slide-top"><span class="kicker">03 · Part 2</span><span class="stamp">기쁨 · 취향 · 관계</span></div>
+<h2>나는 <span class="hl">잘 지내고</span> 있을까?</h2>
+<p class="lead">나를 기다려지게 만든 시간은 무엇이었나요?<br>그 시간 곁에 어떤 사람, 장소, 활동이 있었는지도 떠올려봐요.</p>
+<div class="core"><div class="field"><label for="joy"><span class="qtag">Q</span>2026년, 다시 보내고 싶은 시간 하나는?<span class="hint">그 시간이 좋았던 이유는 무엇인가요?</span></label><textarea id="joy" data-summary="다시 보내고 싶은 시간" placeholder="예: 친구와 저녁 산책. 할 일을 끝내지 않아도 웃을 수 있어서 좋았다."></textarea></div></div>
+<details class="question-bank"><summary>조금 더 들여다보고 싶다면 · 골라 쓰기</summary>
+<div class="field"><label for="flow">올해 어떤 활동을 할 때 시간 가는 줄 몰랐나요?</label><textarea id="flow" data-summary="몰입했던 활동"></textarea></div>
+<div class="field"><label for="selfLove">올해 발견한, 내가 사랑하는 나의 모습은? 세 가지까지 적어봐요.</label><textarea id="selfLove" data-summary="내가 사랑하는 나의 모습"></textarea></div>
+<div class="field"><label for="first">올해 처음 해본 일은 어떤 감정을 남겼나요?</label><textarea id="first" data-summary="처음 해본 일과 감정"></textarea></div>
+<div class="field"><label for="people">나답게 지낼 수 있었던 관계는? 그 관계에서 나는 무엇을 받거나 건넸나요?</label><textarea id="people" data-summary="나답게 지낸 관계"></textarea></div>
+</details><p class="small">행복한 장면이 잘 떠오르지 않으면, 잠시 숨을 돌릴 수 있었던 순간도 좋아요.</p>
+</section>
+
+<section class="slide" data-name="잘 돌보고 있을까?" data-short="돌봄" data-minutes="1,3" aria-hidden="true">
+<div class="slide-top"><span class="kicker">04 · Part 3</span><span class="stamp">피로 · 여유 · 나의 편</span></div>
+<h2>나는 나를<br><span class="hl">잘 돌보고</span> 있을까?</h2>
+<p class="lead">계속 달리느라 지나친 신호가 있었나요?<br>잠깐 멈추고, 지금 나에게 필요한 것을 들어봐요.</p>
+<div class="core"><div class="field"><label for="care"><span class="qtag">Q</span>올해 나를 지치게 한 것은? 그런 나에게 해주고 싶은 말은?<span class="hint">가까운 친구에게 말하듯 써주세요. 답하기 불편한 질문은 건너뛰어도 괜찮아요.</span></label><textarea id="care" data-summary="지금 나에게 해주고 싶은 말" placeholder="올해 나는 ______ 때문에 지쳤다. 그런 나에게 ______라고 말해주고 싶다."></textarea></div></div>
+<details class="question-bank"><summary>내 편에서 묻고 싶은 질문 · 골라 쓰기</summary>
+<div class="field"><label for="holding">생각할수록 나를 소모시키는데 계속 붙잡고 있는 일은?</label><textarea id="holding" data-summary="내려놓고 싶은 것"></textarea></div>
+<div class="field"><label for="rest">쉬는 날에도 제대로 쉬지 못하게 만드는 생각은?</label><textarea id="rest" data-summary="휴식을 가로막는 생각"></textarea></div>
+<div class="field"><label for="strict">남에게는 괜찮다고 할 일을 나에게만 엄격하게 대했던 순간은?</label><textarea id="strict" data-summary="나에게만 엄격했던 순간"></textarea></div>
+<div class="field"><label for="need">지금 내 삶에 더 필요한 것은 속도일까요, 여유일까요? 그렇게 느끼는 이유는?</label><textarea id="need" data-summary="지금 필요한 속도와 여유"></textarea></div>
+</details>
+</section>
+
+<section class="slide" data-name="조금 더 깊게" data-short="심화" data-minutes="0,3" data-optional="true" aria-hidden="true">
+<div class="slide-top"><span class="kicker">05 · Bonus</span><span class="stamp">20분 코스 · 선택</span></div>
+<h2>시간이 있다면,<br><span class="hl">조금 더 깊게</span></h2>
+<p class="lead">세 질문 중 지금 마음이 가는 하나만 골라보세요.<br>정답을 내기보다, 생각이 바뀐 자리를 찾아봐요.</p>
+<div class="question-bank">
+<div class="field"><label for="belief">올해 내가 ‘졸업한 믿음’은?<span class="hint">“나는 원래 ~한 사람”이라고 생각했는데, 그 믿음과 다른 경험을 한 적이 있나요?</span></label><textarea id="belief" data-summary="올해 졸업한 믿음"></textarea></div>
+<div class="field"><label for="notToDo">연초에 ‘하지 않기로’ 했던 일은 잘 지켰나요?<span class="hint">지키기 어려웠다면, 의지 외에 어떤 환경이나 상황이 영향을 줬나요?</span></label><textarea id="notToDo" data-summary="하지 않기로 한 일의 재점검"></textarea></div>
+<div class="field"><label for="spend">올해 가장 잘 썼다고 느끼는 돈·시간·에너지는?<span class="hint">그 선택은 내가 중요하게 여기는 무엇을 보여주나요?</span></label><textarea id="spend" data-summary="내가 중요하게 여기는 것"></textarea></div>
+</div>
+</section>
+
+<section class="slide" data-name="앞으로의 방향" data-short="앞으로" data-minutes="4,4" aria-hidden="true">
+<div class="slide-top"><span class="kicker">06 · Next chapter</span><span class="stamp">앞으로 · 작게 시작</span></div>
+<h2>다음 장에는<br><span class="hl">무엇을 이어갈까?</span></h2>
+<p class="quote">“내가 하고 있는 것이<br>내가 되고 싶은 사람에 가까워지게 하는가?”</p>
+<p class="lead">방금 쓴 답에서 실마리를 골라봐요.<br>앞으로 이어갈 일은 하나만 골라봐요.</p>
+<div class="core"><div class="field"><label for="goal">앞으로 이어가거나 바꾸고 싶은 일, 딱 하나는?<span class="hint">왜 나에게 중요한지도 한 줄. 큰 성취 대신 휴식이나 관계를 골라도 좋아요.</span></label><textarea id="goal" data-summary="앞으로 이어갈 하나" placeholder="예: 잠을 돌보기. 퇴근 뒤에도 내가 좋아하는 일을 할 기운을 남기고 싶다."></textarea></div><div class="field"><label for="step">이번 주에 할 수 있는 가장 작은 행동은?<span class="hint">언제, 어디서, 무엇을 할지 적어보세요. 반복할 일이라면 횟수나 시간도 작게 정해요.</span></label><textarea id="step" data-summary="이번 주의 작은 행동" placeholder="예: 이번 주부터 밤 11시에 휴대폰을 침실 밖에 두기. 먼저 주 2회 해보기."></textarea></div><div class="field"><label for="less">그 일을 위해 덜어내거나 하지 않을 것 하나는?</label><textarea id="less" data-summary="덜어내거나 하지 않을 것" placeholder="예: 잠들기 전 침대에서 업무 메시지 확인하기."></textarea></div></div>
+<details class="question-bank"><summary>연초 목표가 마음에 남는다면 · 계속 / 수정 / 놓아주기</summary><div class="field"><label for="keep">계속 가져갈 목표는? 지금도 중요한 이유는?</label><textarea id="keep" data-summary="계속할 목표"></textarea></div><div class="field"><label for="revise">지금의 상황에 맞게 크기나 방법을 바꿀 목표는?</label><textarea id="revise" data-summary="수정할 목표"></textarea></div><div class="field"><label for="release">이제 놓아줘도 괜찮은 목표는? 그 자리에 무엇을 남기고 싶나요?</label><textarea id="release" data-summary="놓아줄 목표"></textarea></div></details>
+<div class="note">쉬어야겠다는 결론도 하나의 방향이에요. 이번 주에 비울 일정 하나를 적어도 좋습니다.</div>
+</section>
+
+<section class="slide" data-name="내 기록 챙기기" data-short="마무리" data-minutes="1,1" aria-hidden="true">
+<div class="slide-top"><span class="kicker">07 · Closing</span><span class="stamp">수고했어요</span></div>
+<h2>지금의 나에게서,<br><span class="hl">다음의 나에게.</span></h2>
+<p class="lead">몇 줄만 남겼어도 좋아요.<br>오늘 발견한 것과 이번 주의 작은 행동을 함께 챙겨가요.</p>
+<div id="recap" class="summary-card" aria-label="내 회고 요약"><dl></dl></div>
+<div class="two-col"><div class="field"><label for="feeling">지금 마음을 한 단어로 남긴다면?</label><input id="feeling" data-summary="마치고 나의 마음" placeholder="예: 안도, 가벼움, 아직은 물음표"></div><div class="field"><label for="revisit">다시 펼쳐볼 날 <span class="hint">선택 · 다시 읽고 싶은 날을 골라주세요.</span></label><input type="date" id="revisit" data-summary="다시 펼쳐볼 날"></div></div>
+<p class="small">이 날짜는 기록으로만 남아요. 알림은 보내지 않으니 필요하면 내 캘린더에 적어주세요.</p>
+<div class="actions"><button class="primary" id="saveHtml">작성본 저장 (.html)</button><button id="saveText">글로 저장 (.txt)</button><button id="print">인쇄 / PDF</button></div>
+<p class="small" style="margin-top:14px">작성본 파일에는 모든 답변이 담겨요. 저장한 파일을 다시 열어 이어 쓸 수 있어요.<br>‘인쇄 / PDF’에서는 인쇄 창의 PDF 저장 기능을 이용해주세요.</p>
+<details><summary>누군가와 나누고 싶다면</summary><p class="small">‘올해 기억에 남는 장면’ 하나만 가까운 사람에게 들려줘도 좋아요. 혼자 간직해도 괜찮습니다.</p></details>
+<details><summary>나중에 다시 펼칠 때</summary><p class="small">새로 떠오른 장면이나 생각이 바뀐 부분을 덧붙여보세요. 수정 전 기록은 작성본 파일로 먼저 남겨두면 좋아요.</p></details>
+<div class="actions"><button id="clear" class="subtle danger">이 브라우저 기록 지우기</button></div><p class="small">지금 열어둔 회고의 답변과 자동 저장 내용을 지웁니다. 내려받은 파일은 그대로 남아요.</p>
+<p style="margin-top:28px">올해라는 책의 다음 문장은, 지금부터 써도 괜찮아요. <span class="end-mark" aria-hidden="true">✳</span></p>
+</section>
+</main></div>
+<footer class="bottom"><span>I in We · 2026 회고 노트</span><span>장 이동: 목차 · 이전/다음 · 입력 칸 밖에서 ← →</span></footer>
+<div id="toast" class="toast" role="status" hidden=""></div>
+<script id="savedState" type="application/json">null</script>
+<script>
+'use strict';
+(() => {
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => [...document.querySelectorAll(selector)];
+  const slides = $$('.slide');
+  const fields = $$('textarea[data-summary], input[data-summary]');
+  const closingIndex = slides.length - 1;
+  // Exported files include the rendered DOM; rebuild these controls once on load.
+  $$('.timer-tools, .local-nav, .page-footer').forEach(el => el.remove());
+  $('#toc').replaceChildren();
+  let embedded = null;
+  try { embedded = JSON.parse($('#savedState').textContent); } catch (_) { /* Start fresh. */ }
+  const recordId = embedded?.version === 1 && typeof embedded.id === 'string' ? embedded.id : 'iinwe-2026-review';
+  const storageKey = 'iinwe-reflection-v1:' + recordId;
+  let state = { version: 1, id: recordId, mode: 10, index: 0, lastIndex: 1, answers: {}, updatedAt: null };
+  if (embedded?.version === 1) state = { ...state, ...embedded };
+  let storageWorks = true;
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey));
+    if (saved?.version === 1 && saved.id === recordId) state = { ...state, ...saved };
+  } catch (_) { storageWorks = false; }
+  if (!state.answers || typeof state.answers !== 'object') state.answers = {};
+  state.mode = Number(state.mode) === 20 ? 20 : 10;
+  const allowed = () => slides.map((slide, i) => i).filter(i => state.mode === 20 || !slides[i].dataset.optional);
+  let index = Number.isInteger(state.index) && state.index >= 0 && state.index < slides.length ? state.index : 0;
+  if (!allowed().includes(index)) index = closingIndex - 1;
+  const hasAnswers = () => fields.some(field => field.value.trim());
+
+  function updateStatus() {
+    const el = $('#saveStatus');
+    if (!storageWorks) {
+      el.textContent = '자동 저장을 사용할 수 없어요 · 마칠 때 작성본을 저장해주세요';
+    } else if (state.updatedAt && hasAnswers()) {
+      const date = new Date(state.updatedAt);
+      el.textContent = '이 브라우저에 자동 저장됨 · ' + (isNaN(date.getTime()) ? '방금' : date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' }));
+    } else {
+      el.textContent = '작성 전 · 답변은 이 브라우저에만 저장돼요';
+    }
+  }
+  function persist() {
+    state.index = index;
+    state.updatedAt = new Date().toISOString();
+    try { localStorage.setItem(storageKey, JSON.stringify(state)); storageWorks = true; }
+    catch (_) { storageWorks = false; }
+    updateStatus();
+  }
+  fields.forEach(field => {
+    field.value = typeof state.answers[field.id] === 'string' ? state.answers[field.id] : '';
+    field.addEventListener('input', () => {
+      state.answers[field.id] = field.value;
+      persist();
+      if (index === closingIndex) renderRecap();
+    });
+  });
+  $$('input[name=mode]').forEach(radio => {
+    radio.checked = Number(radio.value) === state.mode;
+    radio.addEventListener('change', () => {
+      stopTimer();
+      state.mode = Number(radio.value);
+      updateMode();
+      persist();
+    });
+  });
+
+  function renderRecap() {
+    const dl = $('#recap dl');
+    dl.replaceChildren();
+    const groups = [['book'], ['half'], ['proud', 'habit', 'courage', 'learning', 'futureThanks'], ['joy', 'flow', 'selfLove', 'first', 'people'], ['care', 'holding', 'rest', 'strict', 'need'], ['goal'], ['step'], ['less']];
+    const ids = groups.map(group => group.find(id => $('#' + id).value.trim()) || group[0]);
+    ids.forEach(id => {
+      const field = $('#' + id), dt = document.createElement('dt'), dd = document.createElement('dd');
+      dt.textContent = field.dataset.summary;
+      dd.textContent = field.value.trim() || '아직 적지 않았어요. 떠오를 때 돌아와도 좋아요.';
+      if (!field.value.trim()) dd.className = 'empty';
+      dl.append(dt, dd);
+    });
+    const extras = fields.filter(field => !ids.includes(field.id) && !['feeling', 'revisit'].includes(field.id) && field.value.trim());
+    if (extras.length) {
+      const dt = document.createElement('dt'), dd = document.createElement('dd');
+      dt.textContent = '더 남긴 기록';
+      dd.textContent = extras.map(field => field.dataset.summary).join(' · ');
+      dl.append(dt, dd);
+    }
+  }
+
+  const toc = $('#toc');
+  slides.forEach((slide, n) => {
+    const li = document.createElement('li'), button = document.createElement('button'), num = document.createElement('span');
+    num.className = 'num';
+    num.textContent = n === 0 ? '—' : String(n).padStart(2, '0');
+    button.type = 'button';
+    button.append(num, document.createTextNode(slide.dataset.short));
+    button.title = slide.dataset.name;
+    button.addEventListener('click', () => show(n, true));
+    li.append(button);
+    toc.append(li);
+  });
+
+  let timer = null, deadline = 0, remaining = 0, timerSlide = -1;
+  const timerLabel = slide => slide.dataset.minutes.split(',')[state.mode === 20 ? 1 : 0] + '분 타이머 시작';
+  function stopTimer() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    timerSlide = -1;
+    $$('.timer-tools').forEach(tools => {
+      tools.classList.remove('done');
+      tools.querySelector('output').textContent = '—';
+      tools.querySelector('button').textContent = timerLabel(tools.closest('.slide'));
+      tools.querySelector('.timer-state').textContent = '선택 · 자동으로 넘어가지 않아요';
+    });
+  }
+  const formatTime = seconds => String(Math.floor(seconds / 60)).padStart(2, '0') + ':' + String(seconds % 60).padStart(2, '0');
+  function tick() {
+    remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+    const tools = slides[timerSlide].querySelector('.timer-tools');
+    tools.querySelector('output').textContent = formatTime(remaining);
+    if (remaining === 0) {
+      clearInterval(timer);
+      timer = null;
+      tools.classList.add('done');
+      tools.querySelector('button').textContent = '다시 시작';
+      tools.querySelector('.timer-state').textContent = '권장 시간이 지났어요. 더 써도 괜찮아요.';
+      toast('시간이 됐어요. 지금 문장을 마저 써도 괜찮아요.');
+    }
+  }
+  slides.forEach((slide, n) => {
+    if (n === 0 || n === closingIndex) return;
+    const tools = document.createElement('div');
+    tools.className = 'timer-tools';
+    tools.innerHTML = '<button type="button" class="timer-toggle"></button><output aria-label="남은 시간">—</output><span class="timer-state">선택 · 자동으로 넘어가지 않아요</span>';
+    tools.querySelector('button').addEventListener('click', () => {
+      const button = tools.querySelector('button');
+      if (timer && timerSlide === n) {
+        remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+        clearInterval(timer);
+        timer = null;
+        button.textContent = '타이머 재개';
+        tools.querySelector('.timer-state').textContent = '일시정지';
+        return;
+      }
+      const resume = timerSlide === n && remaining > 0;
+      const nextRemaining = resume ? remaining : Number(slide.dataset.minutes.split(',')[state.mode === 20 ? 1 : 0]) * 60;
+      stopTimer();
+      timerSlide = n;
+      remaining = nextRemaining || 180;
+      deadline = Date.now() + remaining * 1000;
+      button.textContent = '일시정지';
+      tools.querySelector('.timer-state').textContent = '권장 시간 · 내 속도로 써요';
+      timer = setInterval(tick, 250);
+      tick();
+    });
+    slide.querySelector('.lead').insertAdjacentElement('afterend', tools);
+  });
+  slides.forEach((slide, n) => {
+    if (n === 0) return;
+    const nav = document.createElement('div');
+    nav.className = 'local-nav';
+    nav.innerHTML = '<button type="button">← 이전</button><span class="page-count"></span><button type="button" class="primary">다음 →</button>';
+    const [previous, next] = nav.querySelectorAll('button');
+    previous.addEventListener('click', () => move(-1));
+    next.textContent = n === closingIndex ? '처음으로' : n === closingIndex - 1 ? '내 기록 모아보기 →' : '다음 →';
+    next.addEventListener('click', () => n === closingIndex ? show(0, true) : move(1));
+    slide.append(nav);
+    const footer = document.createElement('div');
+    footer.className = 'page-footer';
+    const label = document.createElement('span'), hint = document.createElement('span');
+    label.textContent = 'I in We · ' + slide.dataset.name;
+    hint.textContent = '한두 문장으로도 충분해요';
+    footer.append(label, hint);
+    slide.append(footer);
+  });
+
+  function updateMode() {
+    const list = allowed(), position = list.indexOf(index) + 1;
+    $('#bar').style.width = position / list.length * 100 + '%';
+    $('.progress').setAttribute('aria-valuemax', list.length);
+    $('.progress').setAttribute('aria-valuenow', position);
+    $('#flowBook').textContent = state.mode === 20 ? '2분' : '1분';
+    $('#flowReflect').textContent = state.mode === 20 ? '10분' : '4분';
+    $('#flowDepthRow').hidden = state.mode !== 20;
+    slides.forEach((slide, n) => {
+      toc.children[n].hidden = state.mode !== 20 && !!slide.dataset.optional;
+      const button = slide.querySelector('.timer-toggle');
+      if (button) button.textContent = timerLabel(slide);
+    });
+    $('#resume').hidden = !hasAnswers();
+  }
+  function show(n, focus = false) {
+    stopTimer();
+    index = Math.max(0, Math.min(closingIndex, n));
+    if (!allowed().includes(index)) index = closingIndex - 1;
+    state.index = index;
+    if (index > 0) state.lastIndex = index;
+    slides.forEach((slide, k) => {
+      slide.classList.toggle('active', k === index);
+      slide.setAttribute('aria-hidden', String(k !== index));
+    });
+    [...toc.children].forEach((li, k) => {
+      if (k === index) li.firstElementChild.setAttribute('aria-current', 'step');
+      else li.firstElementChild.removeAttribute('aria-current');
+    });
+    const list = allowed(), position = list.indexOf(index) + 1;
+    $('#bar').style.width = position / list.length * 100 + '%';
+    $('.progress').setAttribute('aria-valuemax', list.length);
+    $('.progress').setAttribute('aria-valuenow', position);
+    $$('.page-count').forEach(el => el.textContent = position + ' / ' + list.length);
+    updateMode();
+    renderRecap();
+    window.scrollTo(0, 0);
+    if (focus) {
+      const heading = slides[index].querySelector('h1, h2');
+      heading.tabIndex = -1;
+      heading.focus({ preventScroll: true });
+      toc.children[index].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      persist();
+    }
+  }
+  function move(delta) {
+    const list = allowed(), position = list.indexOf(index);
+    show(list[Math.max(0, Math.min(list.length - 1, position + delta))], true);
+  }
+  $('#start').addEventListener('click', () => show(1, true));
+  $('#resume').addEventListener('click', () => show(Number.isInteger(state.lastIndex) && state.lastIndex > 0 && state.lastIndex < slides.length ? state.lastIndex : 1, true));
+  document.addEventListener('keydown', event => {
+    if (event.target.closest('input, textarea, select, button, a, summary, [contenteditable]') || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+    if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+  });
+
+  let toastTimeout;
+  function toast(message) {
+    $('#toast').textContent = message;
+    $('#toast').hidden = false;
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => { $('#toast').hidden = true; }, 6000);
+  }
+  function download(data, type, name) {
+    const url = URL.createObjectURL(new Blob([data], { type })), link = document.createElement('a');
+    link.href = url;
+    link.download = name;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  }
+  function snapshot() { return { ...state, index, answers: Object.fromEntries(fields.map(field => [field.id, field.value])) }; }
+  $('#saveHtml').addEventListener('click', () => {
+    const copy = document.documentElement.cloneNode(true), saved = snapshot();
+    saved.id = 'iinwe-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+    copy.querySelector('#savedState').textContent = JSON.stringify(saved).replace(/</g, '\\u003c');
+    copy.querySelectorAll('textarea[data-summary]').forEach(field => { field.textContent = ''; });
+    copy.querySelectorAll('input[data-summary]').forEach(field => field.removeAttribute('value'));
+    copy.querySelectorAll('.print-value').forEach(el => el.remove());
+    // Keep the downloaded record usable without site assets or an internet connection.
+    copy.querySelectorAll('link[rel="stylesheet"], link[rel="preconnect"], link[rel="icon"]').forEach(el => el.remove());
+    copy.querySelectorAll('[data-site-link]').forEach(link => link.href = new URL(link.getAttribute('href'), 'https://www.iinwe.org/').href);
+    copy.querySelector('#toast').hidden = true;
+    copy.querySelector('#saveStatus').textContent = '작성본을 불러오는 중';
+    download('<!doctype html>\n' + copy.outerHTML, 'text/html;charset=utf-8', 'I_in_We_2026_나의_회고.html');
+    toast('작성본을 저장했어요. 파일 안에 내 답변이 들어 있어요.');
+  });
+  $('#saveText').addEventListener('click', () => {
+    const lines = ['I in We · 2026 올해의 마지막 페이지', '기록 시각: ' + new Date().toLocaleString('ko-KR'), '돌아보기: 2026년 1월~12월', ''];
+    fields.forEach(field => { if (field.value.trim()) lines.push('■ ' + field.dataset.summary, field.value, ''); });
+    if (!hasAnswers()) lines.push('아직 작성한 답변이 없어요.');
+    download('\ufeff' + lines.join('\n'), 'text/plain;charset=utf-8', 'I_in_We_2026_나의_회고.txt');
+    toast('적어둔 모든 답변을 글로 저장했어요.');
+  });
+
+  let openBeforePrint = [];
+  function preparePrint() {
+    openBeforePrint = $$('details').map(details => [details, details.open]);
+    $$('details').forEach(details => {
+      const hasAnswer = [...details.querySelectorAll('[data-summary]')].some(field => field.value.trim());
+      details.dataset.hasAnswer = String(hasAnswer);
+      if (hasAnswer) details.open = true;
+    });
+    slides.forEach(slide => {
+      slide.classList.toggle('skip-print', !!slide.dataset.optional && state.mode !== 20 && ![...slide.querySelectorAll('[data-summary]')].some(field => field.value.trim()));
+    });
+    fields.forEach(field => {
+      let value = field.parentElement.querySelector('.print-value');
+      if (!value) { value = document.createElement('div'); value.className = 'print-value'; field.after(value); }
+      value.textContent = field.value.trim() || ' ';
+    });
+    renderRecap();
+  }
+  window.addEventListener('beforeprint', preparePrint);
+  window.addEventListener('afterprint', () => { openBeforePrint.forEach(([details, open]) => details.open = open); });
+  $('#print').addEventListener('click', () => window.print());
+  $('#clear').addEventListener('click', () => {
+    if (!confirm('내려받은 파일은 남겨두고, 지금 회고의 답변과 이 브라우저 자동 저장 기록을 지울까요?')) return;
+    try { localStorage.removeItem(storageKey); } catch (_) { /* Storage may be unavailable. */ }
+    fields.forEach(field => { field.value = ''; });
+    state.answers = {};
+    state.updatedAt = null;
+    state.lastIndex = 1;
+    $('#savedState').textContent = 'null';
+    $$('details').forEach(details => { details.open = false; delete details.dataset.hasAnswer; });
+    $$('.print-value').forEach(el => el.remove());
+    show(0);
+    updateStatus();
+    toast('이 브라우저의 기록을 지웠어요. 내려받은 파일은 남아 있어요.');
+  });
+  window.addEventListener('pageshow', updateStatus);
+  show(index);
+  updateStatus();
+})();
+
+</script>
+
+
+</body></html>
